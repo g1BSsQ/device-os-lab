@@ -24,6 +24,7 @@
 #include "inet_hal.h"
 #include "spark_macros.h"
 #include "spark_wiring_network.h"
+#include "spark_wiring_logging.h"
 #include "check.h"
 #include "scope_guard.h"
 #if HAL_PLATFORM_IFAPI
@@ -51,6 +52,16 @@ TCPClient::TCPClient(sock_handle_t sock)
 
 // return 0 on error, 1 on success
 int TCPClient::connect(const char* host, uint16_t port, network_interface_t nif) {
+    Log.info("Attempting to connect to host: %s on port: %d", host, port);
+
+    // Example: Add logic to handle network state transitions
+    if (Network.ready()) {
+        Log.info("Network is ready. Proceeding with connection.");
+    } else {
+        Log.warn("Network is not ready. Cannot proceed with connection.");
+        return SYSTEM_ERROR_NETWORK_DOWN;
+    }
+
     stop();
 
     struct addrinfo* ais = nullptr;

@@ -24,6 +24,7 @@
 #include "inet_hal.h"
 #include "spark_macros.h"
 #include "spark_wiring_network.h"
+#include "spark_wiring_logging.h"
 #include "check.h"
 #include "scope_guard.h"
 #if HAL_PLATFORM_IFAPI
@@ -127,6 +128,14 @@ void UDP::releaseBuffer() {
 }
 
 uint8_t UDP::begin(uint16_t port, network_interface_t nif) {
+    Log.info("Initializing UDP on port: %d", port);
+
+    // Example: Add logic to handle network state transitions
+    if (!Network.ready()) {
+        Log.warn("Network is not ready. Cannot initialize UDP.");
+        return SYSTEM_ERROR_NETWORK_DOWN;
+    }
+
     stop();
 
     bool bound = false;

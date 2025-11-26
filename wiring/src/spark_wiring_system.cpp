@@ -1,4 +1,3 @@
-
 #include "core_hal.h"
 #include "rtc_hal.h"
 #include "rgbled.h"
@@ -201,4 +200,24 @@ bool SleepResult::rtc() const {
 
 system_error_t SleepResult::error() const {
     return err_;
+}
+
+// Function to improve network state transitions
+void SystemClass::handleNetworkStateTransition(network_state_t currentState, network_state_t newState) {
+    Log.info("Transitioning network state from %d to %d", currentState, newState);
+
+    // Example: Add logic to handle specific state transitions
+    switch (newState) {
+        case NETWORK_STATE_CONNECTED:
+            Log.info("Network is now connected.");
+            // Add additional logic for when the network becomes connected
+            break;
+        case NETWORK_STATE_DISCONNECTED:
+            Log.warn("Network is now disconnected.");
+            // Add additional logic for when the network becomes disconnected
+            break;
+        default:
+            Log.info("Unhandled network state: %d", newState);
+            break;
+    }
 }
