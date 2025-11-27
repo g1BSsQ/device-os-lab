@@ -38,7 +38,20 @@ feat: add support for new sensor module
 - Update documentation
 
 Closes #123
-``` 
+```
+
+## Code Review Guidelines
+
+When reviewing pull requests, please consider:
+
+- **Functionality**: Does the code work as intended?
+- **Style**: Does it follow the project's style guide?
+- **Tests**: Are there adequate tests for the changes?
+- **Documentation**: Are the changes properly documented?
+- **Performance**: Could there be any performance implications?
+- **Security**: Are there any security concerns?
+
+Be constructive and respectful in your feedback. 
 
 
 # Tests and Documentation
