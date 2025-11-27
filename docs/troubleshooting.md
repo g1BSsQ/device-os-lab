@@ -48,6 +48,23 @@ This guide provides solutions to common issues encountered while working with De
 - Verify the device is running on battery power.
 - Check the `spark_wiring_power.cpp` file for issues.
 
+### 5. Common Error Codes
+**Error Code: -1 (SYSTEM_ERROR_UNKNOWN)**
+- General unknown error
+- Check device logs for more details
+
+**Error Code: -2 (SYSTEM_ERROR_BUSY)**
+- System is busy processing another operation
+- Wait and retry the operation
+
+**Error Code: -3 (SYSTEM_ERROR_NOT_SUPPORTED)**
+- Feature not supported on this device
+- Check device capabilities
+
+**Error Code: -4 (SYSTEM_ERROR_INVALID_ARGUMENT)**
+- Invalid argument passed to function
+- Verify function parameters
+
 ## Debugging Tips
 - Use the `Log.info()` function to add debug logs in the code.
 - Check the `logs/` directory for runtime logs.
