@@ -7,6 +7,17 @@
 
 This is the main source code repository of the Particle firmware libraries.
 
+## Table of Contents
+
+- [Device OS](#device-os)
+- [New Features](#new-features)
+- [Getting Started](#getting-started)
+- [Code Examples](#code-examples)
+- [Tinker Application](#tinker-application)
+- [Resources](#resources)
+- [Contributing](#contributing)
+- [License](#license)
+
 # Device OS
 
 Device OS is the operating system for Particle devices. It provides a robust and secure foundation for IoT applications.
