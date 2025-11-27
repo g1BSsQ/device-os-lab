@@ -8,7 +8,7 @@ Over time, these will be rectified as automated checks for style consistency are
 
 - indentation at 4 spaces
 - braces on the next line for function bodies
-- single statement bodies (`if`/`for` etc..) should always have braces, even though they are notstrictly required. This is to reduce errors due to missing braces for multi-line bodies the code is extended. 
+- single statement bodies (`if`/`for` etc..) should always have braces, even though they are not strictly required. This is to reduce errors due to missing braces for multi-line bodies when the code is extended. 
 - functions/methods should generally be smaller than 40 lines and avoid nesting deeper than 6 levels
 
 ## doc-comments
