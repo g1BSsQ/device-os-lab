@@ -83,6 +83,10 @@ void TwoWire::end()
 
 size_t TwoWire::requestFrom(uint8_t address, size_t quantity, uint8_t sendStop)
 {
+    if (quantity == 0)
+    {
+        return 0; // Early return for zero-length requests
+    }
   return requestFrom(WireTransmission(address).quantity(quantity).stop(sendStop));
 }
 
