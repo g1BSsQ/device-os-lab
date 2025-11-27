@@ -1,4 +1,7 @@
 [![CircleCI](https://circleci.com/gh/particle-iot/device-os/tree/develop.svg?style=svg)](https://circleci.com/gh/particle-iot/device-os/tree/develop)
+[![License](https://img.shields.io/badge/license-LGPL--3.0-blue.svg)](LICENSE)
+[![GitHub Issues](https://img.shields.io/github/issues/particle-iot/device-os.svg)](https://github.com/particle-iot/device-os/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/particle-iot/device-os.svg)](https://github.com/particle-iot/device-os/stargazers)
 
 # Particle Device OS Firmware
 
