@@ -105,4 +105,8 @@ into the subtree in this repo.
 - When adding a new troubleshooting guide, ensure it is placed in the appropriate section of `docs/troubleshooting.md`.
 - Verify that the guide is accurate and adheres to the style guide.
 
+### Adding Third-Party Libraries
+- Place new third-party libraries in the appropriate subdirectory under `third_party/`.
+- Ensure the library is properly documented and follows the new directory structure guidelines.
+
 

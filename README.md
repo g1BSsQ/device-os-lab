@@ -378,3 +378,4 @@ This example demonstrates how to debounce a button connected to pin D7. The LED 
 Refer to `docs/code_examples.md` for more details and common patterns for GPIO debounce handling.
 
 - Added a watchdog timer usage guide to `docs/troubleshooting.md`.
+- Updated the `third_party/` directory structure for better clarity.
