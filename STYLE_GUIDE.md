@@ -11,6 +11,21 @@ Over time, these will be rectified as automated checks for style consistency are
 - single statement bodies (`if`/`for` etc..) should always have braces, even though they are not strictly required. This is to reduce errors due to missing braces for multi-line bodies when the code is extended. 
 - functions/methods should generally be smaller than 40 lines and avoid nesting deeper than 6 levels
 
+### Example: Proper Brace Usage
+
+**Good:**
+```cpp
+if (condition)
+{
+    doSomething();
+}
+```
+
+**Avoid:**
+```cpp
+if (condition) doSomething();
+```
+
 ## doc-comments
 - using doxygen format
 - focus on the intent of the function/class - the view from the outside
