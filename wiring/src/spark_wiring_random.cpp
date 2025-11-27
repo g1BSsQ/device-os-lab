@@ -1,11 +1,17 @@
 #include "spark_wiring_random.h"
 #include <stdlib.h>
 
+/**
+ * @brief Generate random number from 0 to max-1
+ * @param max Upper bound (exclusive)
+ * @return Random number in range [0, max)
+ */
 int random(int max)
 {
-  if (0 == max) {
-    return 0;
-  }
+    if (max <= 0)
+    {
+        return 0;
+    }
   return rand() % max;
 }
 
