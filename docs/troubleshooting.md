@@ -55,6 +55,13 @@ This guide provides solutions to common issues encountered while working with De
   ```bash
   particle device doctor
   ```
+- Enable verbose logging with `Log.level(LOG_LEVEL_ALL)`
+- Use `Serial.println()` for immediate console output during development
+
+## Additional Resources
+- [Debugging Guide](debugging.md) - Comprehensive debugging documentation
+- [Build Documentation](build.md) - Build system troubleshooting
+- [Community Forum](https://community.particle.io/) - Ask questions and get help
 
 ## Contact Support
 If the issue persists, please contact the support team with the following information:
