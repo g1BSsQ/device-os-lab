@@ -17,7 +17,28 @@ Whenever possible, please follow these guidelines for contributions:
 4. Add tests for your changes
 5. Commit your changes: `git commit -m "Add new feature"`
 6. Push to the branch: `git push origin feature/my-new-feature`
-7. Submit a pull request 
+7. Submit a pull request
+
+## Commit Message Guidelines
+
+Follow these conventions for commit messages:
+
+- Use the present tense ("Add feature" not "Added feature")
+- Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
+- Limit the first line to 72 characters or less
+- Reference issues and pull requests after the first line
+- Use prefixes: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`
+
+**Example:**
+```
+feat: add support for new sensor module
+
+- Implement driver for XYZ sensor
+- Add configuration options
+- Update documentation
+
+Closes #123
+``` 
 
 
 # Tests and Documentation
