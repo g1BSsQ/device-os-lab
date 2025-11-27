@@ -26,6 +26,19 @@ if (condition)
 if (condition) doSomething();
 ```
 
+### Example: Function Formatting
+
+**Good:**
+```cpp
+void calculateSum(int a, int b)
+{
+    int result = a + b;
+    Serial.println(result);
+}
+```
+
+**Note:** Function opening brace should be on the next line.
+
 ## doc-comments
 - using doxygen format
 - focus on the intent of the function/class - the view from the outside
