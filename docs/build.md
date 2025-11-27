@@ -1,6 +1,12 @@
 
 # The Build System
 
+## Table of Contents
+- [Quick Start](#quick-start)
+- [Build Components](#build-components)
+- [Common Build Options](#common-build-options)
+- [Recipes and Tips](#recipes-and-tips)
+
 ## Quick Start
 
 Running
@@ -9,6 +15,13 @@ Running
 make PLATFORM=<platform-name>
 ```
 in the top-level directory creates the bootloader and firmware binaries for the given platform, which are output to subdirectories of the `build/target/` directory.
+
+### Common Platforms
+- `photon` - Particle Photon (Wi-Fi)
+- `electron` - Particle Electron (Cellular)
+- `argon` - Particle Argon (BLE + Wi-Fi)
+- `boron` - Particle Boron (BLE + Cellular)
+- `tracker` - Particle Tracker
 
 The top-level make is mainly a convenience to build `bootloader` and `main` projects. It
 supports these targets:
