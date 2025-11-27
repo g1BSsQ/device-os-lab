@@ -274,6 +274,12 @@ unsigned char String::changeBuffer(unsigned int maxStrLen)
 
 String & String::copy(const char *cstr, unsigned int length)
 {
+    if (!cstr || length == 0)
+    {
+        invalidate();
+        return *this;
+    }
+
     if (!reserve(length)) {
         invalidate();
         return *this;
