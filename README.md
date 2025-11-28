@@ -421,3 +421,7 @@ For detailed hardware setup instructions, refer to the [Hardware Setup Guide](do
 ## API Documentation
 
 For detailed API documentation, refer to the [API Reference](docs/api_reference.md).
+
+## Scripts Cleanup
+
+The `scripts/` directory has been cleaned up to remove unused scripts. Ensure to check the updated list of available scripts in the `scripts/` directory.

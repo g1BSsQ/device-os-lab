@@ -139,4 +139,8 @@ When contributing to the API, ensure that the documentation in `docs/api_referen
 
 If you encounter build errors while contributing, refer to the [Troubleshooting Guide](docs/troubleshooting.md) for solutions to common issues.
 
+## Scripts Cleanup
+
+The `scripts/` directory has been cleaned up to remove unused scripts. Contributors should ensure they are using the updated list of scripts.
+
 
