@@ -1,13 +1,31 @@
 ## 1. Download and Install Dependencies
 
-Building the firmware locally requires these dependencies ot be installed:
+Building the firmware locally requires these dependencies to be installed:
 
 1. [GCC for ARM Cortex processors](#1-gcc-for-arm-cortex-processors)
 2. [Make](#2-make)
 3. [Device Firmware Upgrade Utilities](#3-device-firmware-upgrade-utilities)
-4. [Zatig](#4-zatig) (for Windows users only)
+4. [Zadig](#4-zadig) (for Windows users only)
 5. [Git](#5-git)
 6. [Command line tools](#6-command-line-tools)
+
+### Quick Install Guide
+
+**macOS (using Homebrew):**
+```bash
+brew tap PX4/homebrew-px4
+brew install gcc-arm-none-eabi-1021 dfu-util git make
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt-get update
+sudo apt-get install gcc-arm-none-eabi dfu-util git make libarchive-zip-perl
+```
+
+**Windows:**
+- Install ARM GCC, Make, dfu-util, Git, MinGW manually (see detailed instructions below)
+- Use Zadig for USB drivers
 
 #### 1. GCC for ARM Cortex processors
 Particle devices use an ARM Cortex Mx CPU based microcontroller. All of the code is built around the GNU GCC toolchain offered and maintained by ARM.
