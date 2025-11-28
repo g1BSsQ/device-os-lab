@@ -131,4 +131,8 @@ When adding examples for the new logging API, follow these steps:
 3. **Verify Functionality**: Ensure the example is functional and adheres to the project's style guide.
 4. **Reference in PR**: When submitting a pull request, reference the example in the PR description.
 
+## Updating API Documentation
+
+When contributing to the API, ensure that the documentation in `docs/api_reference.md` is updated to reflect your changes. Follow the structure outlined in the file to maintain consistency.
+
 

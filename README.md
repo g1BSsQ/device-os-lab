@@ -417,3 +417,7 @@ Refer to `docs/code_examples.md` for more details and common patterns for GPIO d
 ## Hardware Setup
 
 For detailed hardware setup instructions, refer to the [Hardware Setup Guide](docs/hardware.md).
+
+## API Documentation
+
+For detailed API documentation, refer to the [API Reference](docs/api_reference.md).
