@@ -413,3 +413,7 @@ Refer to `docs/code_examples.md` for more details and common patterns for GPIO d
 
 - Added a watchdog timer usage guide to `docs/troubleshooting.md`.
 - Updated the `third_party/` directory structure for better clarity.
+
+## Hardware Setup
+
+For detailed hardware setup instructions, refer to the [Hardware Setup Guide](docs/hardware.md).

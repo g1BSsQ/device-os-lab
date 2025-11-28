@@ -67,6 +67,21 @@
 - Sleep: <1mA
 - Deep Sleep: <100µA
 
+## Hardware Setup Guide
+
+### General Setup Instructions
+
+1. **Power Supply**: Ensure the device is connected to a stable power source.
+2. **Pin Connections**: Verify all pin connections are secure and match the pin mappings provided above.
+3. **Firmware Installation**: Flash the latest firmware using the Particle CLI or Workbench.
+4. **Network Configuration**: Configure WiFi or Cellular settings as per the device type.
+
+### Troubleshooting Tips
+
+- **Device Not Powering On**: Check the power supply and USB cable.
+- **No Network Connectivity**: Verify network credentials and signal strength.
+- **Pin Mapping Issues**: Double-check the pin mappings for your specific device model.
+
 ## See Also
 
 - [Pin Diagrams](https://docs.particle.io/)
