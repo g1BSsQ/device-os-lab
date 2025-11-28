@@ -61,6 +61,11 @@ void RttOutputStream::close() {
 }
 
 size_t RttOutputStream::write(const uint8_t* data, size_t size) {
+    if (!data || size == 0)
+    {
+        return 0; // Nothing to write
+    }
+
     size_t written = 0;
     if (open_) {
         unsigned retries = 0;
