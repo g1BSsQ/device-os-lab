@@ -100,6 +100,9 @@ void serialReadLine(Stream *serialObj, char *dst, int max_len, system_tick_t tim
 
 uint32_t pulseIn(hal_pin_t pin, uint16_t value);
 
+void attachCustomInterrupt(pin_t pin, void (*handler)(void));
+void detachCustomInterrupt(pin_t pin);
+
 #ifdef __cplusplus
 }
 #endif

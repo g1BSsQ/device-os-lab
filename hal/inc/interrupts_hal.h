@@ -114,6 +114,23 @@ void hal_interrupt_trigger_system(hal_irq_t irq, void* reserved);
 
 int hal_interrupt_set_direct_handler(IRQn_Type irqn, hal_interrupt_direct_handler_t handler, uint32_t flags, void* reserved);
 
+/**
+ * @brief Registers a custom interrupt handler.
+ *
+ * @param irq The IRQ number.
+ * @param handler The interrupt handler function.
+ * @return int 0 on success, negative error code on failure.
+ */
+int hal_register_custom_irq_handler(IRQn_Type irq, void (*handler)(void));
+
+/**
+ * @brief Unregisters a custom interrupt handler.
+ *
+ * @param irq The IRQ number.
+ * @return int 0 on success, negative error code on failure.
+ */
+int hal_unregister_custom_irq_handler(IRQn_Type irq);
+
 #ifdef USE_STDPERIPH_DRIVER
 
     #ifdef nRF52840

@@ -386,3 +386,17 @@ AdcReference analogGetReference(void) {
   } 
   return AdcReference::DEFAULT;
 }
+
+void attachCustomInterrupt(pin_t pin, void (*handler)(void)) {
+    IRQn_Type irq = pinmap_irq(pin);
+    if (irq >= 0) {
+        hal_register_custom_irq_handler(irq, handler);
+    }
+}
+
+void detachCustomInterrupt(pin_t pin) {
+    IRQn_Type irq = pinmap_irq(pin);
+    if (irq >= 0) {
+        hal_unregister_custom_irq_handler(irq);
+    }
+}
