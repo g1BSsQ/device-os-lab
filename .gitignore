@@ -77,3 +77,11 @@ coverage/
 *.debug.log
 logs/
 
+# Temporary build files
+*.tmp
+*.log
+*.bak
+*.swp
+*.swo
+.*~
+
