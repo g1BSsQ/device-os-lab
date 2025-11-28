@@ -119,8 +119,11 @@ bool pinAvailable(uint16_t pin) {
 
   // SPI safety check
 #ifndef SPARK_WIRING_NO_SPI
-  if((pin == SCK || pin == MOSI || pin == MISO) && hal_spi_is_enabled(SPI.interface()) == true)
-  {
+  if((pin == SCK || pin == MOSI || pin == MISO) && hal_spi_is_enabled(SPI.interface()) == true) {
+    // Additional validation for SPI state
+    if (!SPI.isReady()) {
+        return false; // SPI not ready
+    }
     return false; // 'pin' is used
   }
 #endif
