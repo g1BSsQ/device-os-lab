@@ -435,3 +435,7 @@ For detailed API documentation, refer to the [API Reference](docs/api_reference.
 ## Scripts Cleanup
 
 The `scripts/` directory has been cleaned up to remove unused scripts. Ensure to check the updated list of available scripts in the `scripts/` directory.
+
+## Dependency Updates
+
+Dependencies have been updated to their latest stable versions. Ensure to review the `CONTRIBUTING.md` file for guidelines on maintaining dependencies.
