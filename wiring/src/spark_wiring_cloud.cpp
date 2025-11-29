@@ -245,6 +245,10 @@ int CloudClass::useLedgersImpl(const Vector<const char*>& usedNames) {
 #endif // Wiring_Ledger
 
 bool CloudClass::subscribe(const char* name, EventHandlerWithContentType handler) {
+    if (!name || strlen(name) == 0 || !handler)
+    {
+        return false;
+    }
     auto h = eventHandlerCast(subscribeWithContentTypeCallbackWrapper);
     return subscribeWithFlags(name, h, (void*)handler, SUBSCRIBE_FLAG_BINARY_DATA);
 }
@@ -259,6 +263,10 @@ bool CloudClass::subscribe(const char* name, EventHandlerWithContentTypeFn handl
 }
 
 bool CloudClass::subscribe(const char* name, particle::EventHandlerWithVariant handler) {
+    if (!name || strlen(name) == 0 || !handler)
+    {
+        return false;
+    }
     auto h = eventHandlerCast(subscribeWithVariantCallbackWrapper);
     return subscribeWithFlags(name, h, (void*)handler, SUBSCRIBE_FLAG_CBOR_DATA);
 }
