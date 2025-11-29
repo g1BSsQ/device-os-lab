@@ -42,11 +42,19 @@ USARTSerial::USARTSerial(hal_usart_interface_t serial, const hal_usart_buffer_co
 
 void USARTSerial::begin(unsigned long baud)
 {
+    if (baud == 0)
+    {
+        return;
+    }
   begin(baud, SERIAL_8N1);
 }
 
 void USARTSerial::begin(unsigned long baud, uint32_t config)
 {
+    if (baud == 0)
+    {
+        return;
+    }
   hal_usart_begin_config(_serial, baud, config, nullptr);
 }
 
