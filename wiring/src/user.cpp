@@ -169,6 +169,10 @@ void(*log_process_ctrl_request_callback)(ctrl_request* req) = nullptr;
 
 // Application handler for control requests
 static void ctrl_request_handler(ctrl_request* req) {
+    if (!req)
+    {
+        return;
+    }
     switch (req->type) {
 #if Wiring_LogConfig
     case CTRL_REQUEST_LOG_CONFIG: {
