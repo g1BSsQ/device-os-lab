@@ -133,12 +133,20 @@ namespace spark {
 
 
     int WiFiClass::scan(WiFiAccessPoint* results, size_t result_count) {
+        if (!results || result_count == 0)
+        {
+            return 0;
+        }
         APScan apScan(results, result_count);
         return apScan.start();
     }
 
 #if !HAL_PLATFORM_WIFI_SCAN_ONLY
     int WiFiClass::getCredentials(WiFiAccessPoint* results, size_t result_count) {
+        if (!results || result_count == 0)
+        {
+            return 0;
+        }
         APList apList(results, result_count);
         return apList.start();
     }
