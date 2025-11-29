@@ -277,6 +277,10 @@ uint8_t TimeClass::isDST()
 /* set the given time as unix/rtc time */
 void TimeClass::setTime(time_t t)
 {
+    if (t < 0)
+    {
+        return;
+    }
     struct timeval tv = {
         .tv_sec = t,
         .tv_usec = 0
