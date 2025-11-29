@@ -85,6 +85,10 @@ private:
 class RateLimiter {
 public:
     bool take(size_t size) {
+        if (size == 0)
+        {
+            return true;
+        }
         std::lock_guard lock(EventLock::instance());
         size = sizeInFullBlocks(size);
         if (dataInFlight_ + size > MAX_EVENT_DATA_IN_FLIGHT) {
@@ -100,6 +104,10 @@ public:
     }
 
     void give(size_t size) {
+        if (size == 0)
+        {
+            return;
+        }
         std::lock_guard lock(EventLock::instance());
         dataInFlight_ -= sizeInFullBlocks(size);
         if (dataInFlight_ < 0) {
