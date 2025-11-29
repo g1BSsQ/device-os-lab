@@ -101,6 +101,10 @@ namespace spark {
     }
 
     bool CellularClass::setBandSelect(const char* bands) {
+        if (!bands || strlen(bands) == 0)
+        {
+            return false;
+        }
         CellularBand band_set;
         int c = 0;
         int b[4];
