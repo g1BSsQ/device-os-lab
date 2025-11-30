@@ -144,6 +144,7 @@ We welcome contributions from the community! Please refer to the [CONTRIBUTING.m
 
 # Resources
 
+
 - [Latest Release](http://github.com/particle-iot/device-os/releases/)
 - [Changelog](CHANGELOG.md)
 
