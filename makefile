@@ -1,6 +1,7 @@
-
 # put deliverable products at the end
 MAKE_DEPENDENCIES=communication hal platform services wiring bootloader main
+docs
+
 PROJECT_ROOT = .
 COMMON_BUILD=build
 BUILD_PATH_BASE=$(COMMON_BUILD)/target
@@ -21,6 +22,10 @@ $(info $(msg))
 
 all: make_deps
 
+docs:
+	@echo "Generating documentation..."
+	doxygen Doxyfile
+
 include $(COMMON_BUILD)/common-tools.mk
 include $(COMMON_BUILD)/recurse.mk
 include $(COMMON_BUILD)/verbose.mk
@@ -29,4 +34,4 @@ clean: clean_deps
 	$(VERBOSE)$(RMDIR) $(BUILD_PATH_BASE)
 
 
-.PHONY: all
+.PHONY: all docs
