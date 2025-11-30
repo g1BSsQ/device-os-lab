@@ -173,6 +173,20 @@ typedef struct _particle_cloud_ledger_SubscribeResponse_Ledger {
     uint64_t last_updated; 
 } particle_cloud_ledger_SubscribeResponse_Ledger;
 
+/* Add a new field for email notifications */
+typedef struct _particle_cloud_ledger_EmailNotification {
+    pb_callback_t recipient; /* Email recipient */
+    pb_callback_t subject;   /* Email subject */
+    pb_callback_t body;      /* Email body */
+} particle_cloud_ledger_EmailNotification;
+
+/* Extend existing ledger update message */
+typedef struct _particle_cloud_ledger_LedgerUpdate {
+    pb_callback_t name; /* Name of the ledger */
+    pb_callback_t data; /* Data of the update */
+    particle_cloud_ledger_EmailNotification email_notification; /* Email notification details */
+} particle_cloud_ledger_LedgerUpdate;
+
 
 /* Helper constants for enums */
 #define _particle_cloud_ledger_ScopeType_MIN particle_cloud_ledger_ScopeType_SCOPE_TYPE_UNKNOWN

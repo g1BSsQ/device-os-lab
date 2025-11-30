@@ -29,6 +29,7 @@
 #include "spark_wiring_vector.h"
 #include "spark_wiring_interrupts.h"
 #include <algorithm>
+#include "email_notification.h" // Include the email notification header
 
 namespace {
 
@@ -145,6 +146,15 @@ public:
     }
 };
 
+void sendEmailNotification(const char* eventDescription) {
+    // Example function to send an email notification
+    EmailNotification email;
+    email.setRecipient("user@example.com");
+    email.setSubject("System Event Notification");
+    email.setBody(eventDescription);
+    email.send();
+}
+
 } // unnamed
 
 /**
@@ -230,4 +240,11 @@ void system_notify_event(system_event_t event, uint32_t data, void* pointer, voi
 
 void system_notify_time_changed(uint32_t data, void* reserved, void* reserved1) {
     system_notify_event(time_changed, data);
+}
+
+void handleSystemEvent(system_event_t event) {
+    // Example event handling logic
+    if (event == SYSTEM_EVENT_CRITICAL_ERROR) {
+        sendEmailNotification("A critical error occurred in the system.");
+    }
 }

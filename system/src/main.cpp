@@ -955,3 +955,27 @@ void assert_failed(uint8_t* file, uint32_t line)
 	}
 }
 #endif
+#include "email_notification.h" // Include the email notification header
+
+void notifyStartupEvent() {
+    // Notify via email when the system starts up
+    EmailNotification email;
+    email.setRecipient("admin@example.com");
+    email.setSubject("System Startup");
+    email.setBody("The system has started successfully.");
+    email.send();
+}
+
+int main() {
+    // Existing initialization code
+    // ...existing code...
+
+    notifyStartupEvent(); // Send email notification for startup
+
+    // Main program loop
+    while (true) {
+        // ...existing code...
+    }
+
+    return 0;
+}

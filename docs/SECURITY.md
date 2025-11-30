@@ -94,3 +94,19 @@ buffer[sizeof(buffer) - 1] = '\0';
 
 - [OWASP IoT Security](https://owasp.org/www-project-internet-of-things/)
 - [Particle Security Documentation](https://docs.particle.io/security/)
+
+## Email Notification
+
+### How to Enable Email Notifications
+
+To enable email notifications for specific events in Device OS:
+
+1. Ensure your device is connected to the cloud.
+2. Configure the email settings in the `system_event` module.
+3. Use the `email_notification` API to send notifications for specific events.
+
+### Reporting Issues
+
+If you encounter issues with email notifications, please report them to:
+- Email: support@particle.io
+- Include detailed logs and steps to reproduce the issue.
