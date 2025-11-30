@@ -10,6 +10,9 @@ Whenever possible, please follow these guidelines for contributions:
 - If the changes have an impact application developers, then those changes should be described in the documentation.
 - Ensure your code adheres to the [Style Guide](STYLE_GUIDE.md).
 - Use meaningful commit messages following the [Commit Message Guidelines](#commit-message-guidelines).
+- Ensure all new features or fixes are accompanied by relevant documentation updates.
+- Run all tests locally and ensure they pass before submitting a pull request.
+- Use draft pull requests for work-in-progress contributions to gather early feedback.
 
 ## Example Pull Request Process
 
