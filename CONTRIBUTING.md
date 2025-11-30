@@ -7,7 +7,9 @@ Whenever possible, please follow these guidelines for contributions:
 - Keep each pull request small and focused on a single feature or bug fix.
 - Familiarize yourself with the code base, and follow the formatting principles adhered to in the surrounding code.
 - Wherever possible, provide unit tests for your contributions.
-- If the changes have an impact application developers, then those changes should be described in the documentation. 
+- If the changes have an impact application developers, then those changes should be described in the documentation.
+- Ensure your code adheres to the [Style Guide](STYLE_GUIDE.md).
+- Use meaningful commit messages following the [Commit Message Guidelines](#commit-message-guidelines).
 
 ## Example Pull Request Process
 

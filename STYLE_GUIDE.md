@@ -97,3 +97,10 @@ The code guidelines [here](http://stroustrup.com/JSF-AV-rules.pdf) offer some go
 - **Free Unused Memory**: Ensure that dynamically allocated memory is freed when no longer needed.
 - **Optimize Data Structures**: Use memory-efficient data structures like bitfields or unions where applicable.
 - **Profile Memory Usage**: Regularly profile your application to identify memory bottlenecks and optimize accordingly.
+
+## Commit Message Style
+
+- Use the present tense ("Fix bug" not "Fixed bug").
+- Use the imperative mood ("Add feature" not "Adds feature").
+- Limit the subject line to 72 characters.
+- Include references to issues or pull requests when applicable.

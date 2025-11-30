@@ -140,7 +140,7 @@ For troubleshooting common build errors, refer to the [Troubleshooting Guide](do
 
 ## Contributing
 
-We welcome contributions to the Particle Device OS Firmware! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) file for detailed guidelines on how to submit pull requests and contribute to the project.
+We welcome contributions from the community! Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for detailed guidelines on how to contribute to this project. Make sure to follow the [Style Guide](STYLE_GUIDE.md) and use meaningful commit messages as described in the contribution guidelines.
 
 # Resources
 
