@@ -61,6 +61,10 @@ private:
 } // unnamed
 
 int InputStream::readAll(char* data, size_t size, unsigned timeout) {
+    if (!data || size == 0)
+    {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     const auto end = data + size;
     Timer t(timeout);
     for (;;) {
@@ -97,6 +101,10 @@ int InputStream::seek(size_t offset) {
 }
 
 int OutputStream::writeAll(const char* data, size_t size, unsigned timeout) {
+    if (!data || size == 0)
+    {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     const auto end = data + size;
     Timer t(timeout);
     for (;;) {
