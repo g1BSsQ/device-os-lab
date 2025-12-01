@@ -161,6 +161,10 @@ int findLeafEntry(lfs_t* lfs, char* pathBuf, size_t bufSize, size_t pathLen, boo
 } // unnamed
 
 int openFile(lfs_file_t* file, const char* path, unsigned flags) {
+    if (!file || !path || strlen(path) == 0)
+    {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     const auto fs = filesystem_get_instance(FILESYSTEM_INSTANCE_DEFAULT, nullptr);
     CHECK_TRUE(fs, SYSTEM_ERROR_FILE);
     lfs_info info = {};
