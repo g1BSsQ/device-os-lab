@@ -14,4 +14,15 @@
 /third_party/freertos/freertos/FreeRTOS/Demo
 /third_party/freertos/freertos/FreeRTOS-Plus
 /user/applications/tinker/target
+# Temporary files
+*.tmp
+*.log
+*.bak
+*.swp
+*.swo
+*.DS_Store
+*.~
+*.pyc
+*.pyo
+*.egg-info/
 
