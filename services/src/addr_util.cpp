@@ -23,7 +23,8 @@
 namespace particle {
 
 bool macAddressToString(const MacAddress& addr, char* str, size_t size) {
-    if (size < MAC_ADDRESS_STRING_SIZE) {
+    if (!str || size < MAC_ADDRESS_STRING_SIZE)
+    {
         return false;
     }
     for (size_t i = 0; i < MAC_ADDRESS_SIZE; ++i) {
@@ -40,7 +41,8 @@ bool macAddressToString(const MacAddress& addr, char* str, size_t size) {
 }
 
 bool macAddressFromString(MacAddress* addr, const char* str, size_t size) {
-    if (size < MAC_ADDRESS_STRING_SIZE) {
+    if (!addr || !str || size < MAC_ADDRESS_STRING_SIZE)
+    {
         return false;
     }
     for (size_t i = 0; i < MAC_ADDRESS_SIZE; ++i) {
