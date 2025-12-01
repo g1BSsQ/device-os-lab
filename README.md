@@ -36,6 +36,7 @@ Device OS is the operating system for Particle devices. It provides a robust and
 - Enhances the reliability of network connectivity.
 - Handles state transitions more robustly to ensure seamless operation.
 
+
 ## Getting Started
 
 To get started with Device OS, follow the instructions below:
