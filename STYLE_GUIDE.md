@@ -1,15 +1,15 @@
 This is the beginning of the style guide for the Particle Device OS repository.
-It's presently just an outline, and will be fleshed out over time.
+It's presently just an outline and will be fleshed out over time.
 
 Note that it will be easy to find violations of these guidelines in the existing codebase.
 Over time, these will be rectified as automated checks for style consistency are introduced.
 
 ## Formatting
 
-- indentation at 4 spaces
-- braces on the next line for function bodies
-- single statement bodies (`if`/`for` etc..) should always have braces, even though they are not strictly required. This is to reduce errors due to missing braces for multi-line bodies when the code is extended. 
-- functions/methods should generally be smaller than 40 lines and avoid nesting deeper than 6 levels
+- Indentation at 4 spaces.
+- Braces on the next line for function bodies.
+- Single statement bodies (`if`/`for` etc.) should always have braces, even though they are not strictly required. This is to reduce errors due to missing braces for multi-line bodies when the code is extended.
+- Functions/methods should generally be smaller than 40 lines and avoid nesting deeper than 6 levels.
 
 ### Example: Proper Brace Usage
 

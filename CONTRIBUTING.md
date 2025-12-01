@@ -1,13 +1,13 @@
 # Contributions
 
-All contributors must first sign the [Particle Individual Contributor License Agreement (CLA)](https://part.cl/icla), which is based on the Google CLA, and provides the Particle team a license to re-distribute your contributions.
+All contributors must first sign the [Particle Individual Contributor License Agreement (CLA)](https://part.cl/icla), which is based on the Google CLA and provides the Particle team a license to re-distribute your contributions.
 
 Whenever possible, please follow these guidelines for contributions:
 
 - Keep each pull request small and focused on a single feature or bug fix.
-- Familiarize yourself with the code base, and follow the formatting principles adhered to in the surrounding code.
+- Familiarize yourself with the codebase, and follow the formatting principles adhered to in the surrounding code.
 - Wherever possible, provide unit tests for your contributions.
-- If the changes have an impact application developers, then those changes should be described in the documentation.
+- If the changes impact application developers, then those changes should be described in the documentation.
 - Ensure your code adheres to the [Style Guide](STYLE_GUIDE.md).
 - Use meaningful commit messages following the [Commit Message Guidelines](#commit-message-guidelines).
 - Ensure all new features or fixes are accompanied by relevant documentation updates.
@@ -16,23 +16,23 @@ Whenever possible, please follow these guidelines for contributions:
 
 ## Example Pull Request Process
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/my-new-feature`
-3. Make your changes following the style guide
-4. Add tests for your changes
-5. Commit your changes: `git commit -m "Add new feature"`
-6. Push to the branch: `git push origin feature/my-new-feature`
-7. Submit a pull request
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature/my-new-feature`.
+3. Make your changes following the style guide.
+4. Add tests for your changes.
+5. Commit your changes: `git commit -m "Add new feature"`.
+6. Push to the branch: `git push origin feature/my-new-feature`.
+7. Submit a pull request.
 
 ## Commit Message Guidelines
 
 Follow these conventions for commit messages:
 
-- Use the present tense ("Add feature" not "Added feature")
-- Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
-- Limit the first line to 72 characters or less
-- Reference issues and pull requests after the first line
-- Use prefixes: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`
+- Use the present tense ("Add feature" not "Added feature").
+- Use the imperative mood ("Move cursor to..." not "Moves cursor to...").
+- Limit the first line to 72 characters or less.
+- Reference issues and pull requests after the first line.
+- Use prefixes: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`.
 
 **Example:**
 ```

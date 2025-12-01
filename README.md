@@ -5,7 +5,7 @@
 
 # Particle Device OS Firmware
 
-This is the main source code repository of the Particle firmware libraries.
+This is the main source code repository for the Particle firmware libraries.
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ Device OS is the operating system for Particle devices. It provides a robust and
 ## New Features
 
 ### Power Consumption Logging
-- Logs battery level and power consumption metrics.
+- Logs battery levels and power consumption metrics.
 - Helps monitor and optimize energy usage.
 
 ### Custom LED Blink Patterns
