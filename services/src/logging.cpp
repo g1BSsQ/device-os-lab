@@ -78,6 +78,10 @@ void log_set_callbacks(log_message_callback_type log_msg, log_write_callback_typ
 }
 
 void log_message_v(int level, const char *category, LogAttributes *attr, void *reserved, const char *fmt, va_list args) {
+    if (!attr || !fmt)
+    {
+        return;
+    }
     const log_message_callback_type msg_callback = log_msg_callback;
     if (!msg_callback && (!log_compat_callback || level < log_compat_level)) {
         return;
@@ -127,7 +131,8 @@ void log_message(int level, const char *category, LogAttributes *attr, void *res
 }
 
 void log_write(int level, const char *category, const char *data, size_t size, void *reserved) {
-    if (!size) {
+    if (!data || !size)
+    {
         return;
     }
     const log_write_callback_type write_callback = log_write_callback;
@@ -180,7 +185,10 @@ void log_printf(int level, const char *category, void *reserved, const char *fmt
 
 void log_dump(int level, const char *category, const void *data, size_t size, int flags, void *reserved) {
     const log_write_callback_type write_callback = log_write_callback;
-    if (!size || (!write_callback && (!log_compat_callback || level < log_compat_level))) {
+    if (!data || !size
+        || (!write_callback
+            && (!log_compat_callback || level < log_compat_level)))
+    {
         return;
     }
     static const char hex[] = "0123456789abcdef";
