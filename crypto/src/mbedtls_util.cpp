@@ -130,30 +130,39 @@ int mbedtls_pk_pem_to_der(const char* pem_key, size_t pem_len, uint8_t** der_key
     mbedtls_pk_context pkctx;
     mbedtls_pk_init(&pkctx);
 
-    *der_key = NULL;
+    *der_key = nullptr;
     *der_len = 0;
 
-    int ret = mbedtls_pk_parse_key(&pkctx, (const uint8_t*)pem_key, pem_len, NULL, 0);
-    if (ret == 0) {
-        ret = -1;
-        size_t len = pem_len * 3 / 4;
-        if (len > 0) {
-            uint8_t* der = allocate_memory(len);
-            if (der) {
-                ret = mbedtls_pk_write_key_der(&pkctx, der, len);
-                if (ret > 0) {
-                    if ((size_t)ret != len) {
-                        memmove(der, der + (len - ret), ret);
-                    }
-                    *der_key = der;
-                    *der_len = ret;
-                    ret = 0;
-                } else {
-                    free(der);
-                }
-            }
-        }
+    int ret = mbedtls_pk_parse_key(&pkctx, (const uint8_t*)pem_key, pem_len, nullptr, 0);
+    if (ret != 0) {
+        mbedtls_pk_free(&pkctx);
+        return SYSTEM_ERROR_KEY_INVALID_FORMAT;
     }
+
+    size_t len = pem_len * 3 / 4;
+    if (len == 0) {
+        mbedtls_pk_free(&pkctx);
+        return SYSTEM_ERROR_NO_MEMORY;
+    }
+
+    std::unique_ptr<uint8_t[]> der(new (std::nothrow) uint8_t[len]);
+    if (!der) {
+        mbedtls_pk_free(&pkctx);
+        return SYSTEM_ERROR_NO_MEMORY;
+    }
+
+    ret = mbedtls_pk_write_key_der(&pkctx, der.get(), len);
+    if (ret > 0) {
+        if ((size_t)ret != len) {
+            std::memmove(der.get(), der.get() + (len - ret), ret);
+        }
+        *der_key = der.release();
+        *der_len = ret;
+        ret = 0;
+    } else {
+        ret = SYSTEM_ERROR_CRYPTO;
+    }
+
     mbedtls_pk_free(&pkctx);
     return ret;
 }
