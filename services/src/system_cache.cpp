@@ -37,10 +37,16 @@ SystemCache& SystemCache::instance() {
 }
 
 int SystemCache::get(SystemCacheKey key, void* value, size_t length) {
+    if (!value || length == 0) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     return tlv_.get(to_underlying(key), (uint8_t*)value, length);
 }
 
 int SystemCache::set(SystemCacheKey key, const void* value, size_t length) {
+    if (!value && length > 0) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     CHECK_TRUE(length <= std::numeric_limits<uint16_t>::max(), SYSTEM_ERROR_TOO_LARGE);
     return tlv_.set(to_underlying(key), (const uint8_t*)value, length, 0);
 }
