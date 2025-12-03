@@ -36,6 +36,11 @@ Device OS is the operating system for Particle devices. It provides a robust and
 - Enhances the reliability of network connectivity.
 - Handles state transitions more robustly to ensure seamless operation.
 
+### New Protocol Support
+- Added support for a new protocol in the `proto_defs` module.
+- Enables encoding, decoding, and logging of protocol messages.
+- Provides enhanced compatibility with IoT communication standards.
+
 
 ## Getting Started
 

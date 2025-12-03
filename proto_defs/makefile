@@ -9,4 +9,8 @@ BUILD_PATH_EXT = $(PROTO_DEFS_BUILD_PATH_EXT)
 DEPENDENCIES = third_party/nanopb
 MAKE_DEPENDENCIES = third_party/nanopb
 
+# Added new protocol source files
+PROTO_SOURCES = src/new_protocol.pb.c
+PROTO_HEADERS = src/new_protocol.pb.h
+
 include ../build/arm-tlm.mk

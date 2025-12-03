@@ -16,6 +16,7 @@
  */
 
 #include "logging.h"
+#include "new_protocol.pb.h"
 
 #include <algorithm>
 #include <cstdio>
@@ -241,4 +242,13 @@ const char* log_level_name(int level, void *reserved) {
     };
     const int i = std::max(0, std::min<int>(level / 10, sizeof(names) / sizeof(names[0]) - 1));
     return names[i];
+}
+
+// Added support for logging new protocol messages
+void logNewProtocolMessage(const NewProtocolMessage& message) {
+    printf("Logging New Protocol Message:\n");
+    printf("ID: %s\n", message.id);
+    printf("Version: %u\n", message.version);
+    printf("Payload Size: %zu\n", sizeof(message.payload));
+    printf("Encrypted: %s\n", message.is_encrypted ? "true" : "false");
 }

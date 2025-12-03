@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package particle.firmware;
+
+import "nanopb.proto";
+
+/**
+ * New protocol definition.
+ */
+message NewProtocolMessage {
+  string id = 1 [(nanopb).max_length = 64]; ///< Unique identifier.
+  uint32 version = 2; ///< Protocol version.
+  bytes payload = 3 [(nanopb).max_size = 256]; ///< Message payload.
+  bool is_encrypted = 4; ///< Encryption flag.
+}
