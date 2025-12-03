@@ -262,7 +262,11 @@ size_t Messages::ping(uint8_t* buf, uint16_t message_id)
 
 size_t Messages::presence_announcement(unsigned char *buf, const char *id)
 {
-	buf[0] = 0x50; // Non-Confirmable, no token
+    if (!buf || !id)
+    {
+        return 0;
+    }
+        buf[0] = 0x50; // Non-Confirmable, no token
 	buf[1] = 0x02; // Code POST
 	buf[2] = 0x00; // message id ignorable in this context
 	buf[3] = 0x00;
@@ -301,7 +305,11 @@ size_t Messages::separate_response_with_payload(unsigned char *buf, uint16_t mes
 		unsigned char token, unsigned char code, const unsigned char* payload,
 		unsigned payload_len, bool confirmable)
 {
-	buf[0] = confirmable ? 0x41 : 0x51; // confirmable/non-confirmable, one-byte token
+    if (!buf)
+    {
+        return 0;
+    }
+        buf[0] = confirmable ? 0x41 : 0x51; // confirmable/non-confirmable, one-byte token
 	buf[1] = code;
 	buf[2] = message_id >> 8;
 	buf[3] = message_id & 0xff;
