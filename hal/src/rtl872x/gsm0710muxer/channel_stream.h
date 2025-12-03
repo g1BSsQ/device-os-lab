@@ -88,6 +88,9 @@ inline MuxerChannelStream<MuxerT>::~MuxerChannelStream() {
         os_semaphore_destroy(sem_);
         sem_ = nullptr;
     }
+    // Ensure rxBuf_ and rxBufData_ are reset to release memory
+    rxBuf_.reset();
+    rxBufData_.reset();
 }
 
 template <typename MuxerT>
