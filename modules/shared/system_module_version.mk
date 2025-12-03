@@ -50,7 +50,7 @@ SOFTDEVICE_DEPENDENCY = 202
 # OTA updates on Argon specifically to some 3.x versions due to a failed dependency check even though the
 # dependencies are satisfied. Swapping two current dependencies seems to help.
 ifneq ($(PLATFORM_ID),12)
-SYSTEM_PART1_MODULE_DEPENDENCY ?= ${MODULE_FUNCTION_BOOTLOADER},0,${BOOTLOADER_DEPENDENCY}
+SYSTEM_PART1_MODULE_DEPENDENCY ?= ${MODULE_FUNCTION_BOOTLOADER},1,${BOOTLOADER_DEPENDENCY}
 else
 SYSTEM_PART1_MODULE_DEPENDENCY2 ?= ${MODULE_FUNCTION_BOOTLOADER},0,${BOOTLOADER_DEPENDENCY}
 endif
