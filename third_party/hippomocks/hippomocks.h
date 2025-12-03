@@ -21,6 +21,16 @@
 #ifndef HIPPOMOCKS_H
 #define HIPPOMOCKS_H
 
+// Added support for integration with external libraries
+// Define a macro to enable external library support
+#ifndef EXTERNAL_LIBRARY_SUPPORT
+#define EXTERNAL_LIBRARY_SUPPORT
+
+// Include external library headers here
+#include "external_library.h"
+
+#endif // EXTERNAL_LIBRARY_SUPPORT
+
 // If you want to put all HippoMocks symbols into the global namespace, use the define below.
 //#define NO_HIPPOMOCKS_NAMESPACE
 
