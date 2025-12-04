@@ -26,6 +26,10 @@
 namespace particle::protocol {
 
 ProtocolError Subscriptions::send_subscription_impl(MessageChannel& channel, const char* filter, size_t filterLen, int flags) {
+    if (!filter || filterLen == 0)
+    {
+        return ProtocolError::INVALID_ARGUMENT;
+    }
     Message msg;
     auto err = channel.create(msg);
     if (err != ProtocolError::NO_ERROR) {

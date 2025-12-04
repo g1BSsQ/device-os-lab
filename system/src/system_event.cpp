@@ -165,6 +165,10 @@ void sendEmailNotification(const char* eventDescription) {
  * @return {@code 0} if the system event handlers were registered successfully. Non-zero otherwise.
  */
 int system_subscribe_event(system_event_t events, system_event_handler_t* handler, SystemEventContext* context) {
+    if (!handler)
+    {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     // NOTE: using both mutex and ATOMIC_BLOCK, as some of the events may be generated directly out of an ISR.
     // Modification of subscriptions normally happens from thread context, so for events generated outside ISR
     // context, only mutex acquisition is sufficient to keep things thread safe (see system_notify_event_async())

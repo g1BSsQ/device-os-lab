@@ -89,6 +89,10 @@ bool attachInterrupt(uint16_t pin, wiring_interrupt_handler_t fn, InterruptMode 
 
 bool attachInterrupt(uint16_t pin, raw_interrupt_handler_t handler, InterruptMode mode, int8_t priority, uint8_t subpriority)
 {
+    if (pin >= TOTAL_PINS || !handler)
+    {
+        return false;
+    }
     hal_interrupt_detach(pin);
     hal_interrupt_extra_configuration_t extra = {};
     if (SYSTEM_ERROR_NONE != hal_interrupt_attach(pin, call_raw_interrupt_handler, (void*)handler, mode, configure_interrupt(extra, priority, subpriority))) {

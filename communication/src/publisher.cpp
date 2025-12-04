@@ -33,6 +33,10 @@ void Publisher::add_ack_handler(message_id_t msg_id, CompletionHandler handler) 
 
 ProtocolError Publisher::send_event(MessageChannel& channel, const char* event_name, const char* data, size_t data_size,
         int content_type, int ttl, int flags, system_tick_t time, CompletionHandler handler) {
+    if (!event_name)
+    {
+        return ProtocolError::INVALID_ARGUMENT;
+    }
     bool is_system_event = is_system(event_name);
     bool rate_limited = is_rate_limited(is_system_event, time);
     if (rate_limited) {

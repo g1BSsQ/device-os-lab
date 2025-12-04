@@ -110,6 +110,10 @@ FirmwareUpdate::FirmwareUpdate() :
 }
 
 int FirmwareUpdate::startUpdate(size_t fileSize, const char* fileHash, size_t* partialSize, FirmwareUpdateFlags flags) {
+    if (fileSize == 0)
+    {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     const bool localUpdate = flags & FirmwareUpdateFlag::LOCAL_UPDATE;
     const bool validateOnly = flags & FirmwareUpdateFlag::VALIDATE_ONLY;
 #if HAL_PLATFORM_RESUMABLE_OTA

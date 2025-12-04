@@ -777,6 +777,10 @@ Variant Variant::at(int index) const {
 }
 
 bool Variant::set(const char* key, Variant val) {
+    if (!key)
+    {
+        return false;
+    }
     auto& map = asMap();
     if (!ensureCapacity(map, 1)) {
         return false;
