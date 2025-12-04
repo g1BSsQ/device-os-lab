@@ -27,7 +27,9 @@ source "$PROTO_DEFS_DIR/.venv/bin/activate"
 # Install dependencies
 pip3 install protobuf
 
+# Organized proto compilation by category
 # Compile control request definitions
+echo "Compiling control request definitions"
 gen_proto "${SHARED_DIR}/control/extensions.proto"
 gen_proto "${SHARED_DIR}/control/common.proto"
 gen_proto "${SHARED_DIR}/control/config.proto"
@@ -40,11 +42,12 @@ gen_proto "${SHARED_DIR}/control/storage.proto"
 gen_proto "${SHARED_DIR}/control/cloud.proto"
 
 # Compile cloud protocol definitions
+echo "Compiling cloud protocol definitions"
 gen_proto "${SHARED_DIR}/cloud/ledger.proto"
 gen_proto "${SHARED_DIR}/cloud/cloud.proto"
 gen_proto "${SHARED_DIR}/cloud/describe.proto"
-gen_proto "${SHARED_DIR}/cloud/ledger.proto"
 
 # Compile internal definitions
+echo "Compiling internal definitions"
 gen_proto "${INTERNAL_DIR}/network_config.proto"
 gen_proto "${INTERNAL_DIR}/ledger.proto"
