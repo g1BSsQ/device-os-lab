@@ -606,6 +606,7 @@ int BleControlRequestChannel::init() {
     if (ret != 0) {
         goto error;
     }
+    LOG_DEBUG(INFO, "BLE control request channel initialized");
     return 0;
 error:
     destroy();

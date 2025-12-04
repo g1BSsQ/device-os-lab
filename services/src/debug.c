@@ -6,6 +6,7 @@
  */
 
 #include "debug.h"
+#include "logging.h"
 
 #if defined(DEBUG_BUILD)
 #define LOG_LEVEL_AT_RUN_TIME LOG_LEVEL
@@ -30,14 +31,13 @@ void set_logger_output(debug_output_fn output, LoggerOutputLevel level) {
     log_compat_callback = output;
 }
 
-void log_print_(int level, int line, const char *func, const char *file, const char *msg, ...) {
-    // Deprecated, use newer log_message() function instead
-    // This function may not be removed because it is exported in dynalib
-}
-
-void log_print_direct_(int level, void* reserved, const char *msg, ...) {
-    // Deprecated, use newer log_printf() function instead
-    // This function may not be removed because it is exported in dynalib
+void log_message(int level, const char *format, ...) {
+    if (level <= log_compat_level && log_compat_callback) {
+        va_list args;
+        va_start(args, format);
+        log_compat_callback(format, args);
+        va_end(args);
+    }
 }
 
 void set_thread_current_function_pointers(void* c1, void* c2, void* c3, void* c4, void* c5) {
