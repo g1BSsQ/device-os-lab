@@ -23,6 +23,9 @@ $(info $(msg))
 # Modularized makefile structure
 SUBDIRS := communication hal platform services wiring bootloader main
 
+# Added third-party libraries to the build process
+SUBDIRS += third_party/mbedtls third_party/nanopb third_party/lwip
+
 .PHONY: all clean $(SUBDIRS)
 
 # Parallel build for faster execution

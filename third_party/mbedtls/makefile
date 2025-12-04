@@ -6,8 +6,8 @@ TARGET_TYPE = a
 
 BUILD_PATH_EXT=$(MBEDTLS_BUILD_PATH_EXT)
 
-# depends only on headers. Will it work?
-DEPENDENCIES = crypto platform hal
+# Ensure compatibility with updated dependencies
+DEPENDENCIES = crypto platform hal freertos
 
 PROJECT_ROOT ?= ../..
 include ../../build/arm-tlm.mk
