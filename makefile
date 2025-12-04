@@ -51,4 +51,15 @@ new_target:
 	@echo "Building new target..."
 	# Add commands to build the new target here
 
+# Added dynamic library support for services
+DYNALIB_DIR := services-dynalib
+
+.PHONY: dynalib
+
+dynalib:
+	$(MAKE) -C $(DYNALIB_DIR)
+
+all: dynalib
+	@echo "Dynamic library for services built successfully."
+
 .PHONY: all docs new_target
