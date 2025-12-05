@@ -1,6 +1,7 @@
 PROJECT_NAME           = "Device OS API Documentation"
+PROJECT_BRIEF          = "Comprehensive documentation for Device OS."
 OUTPUT_DIRECTORY       = docs/doxygen_output
-INPUT                  = docs/api_reference.md src/ include/
+INPUT                  = docs/api_reference.md src/ include/ bootloader/ platform/
 FILE_PATTERNS          = *.h *.hh *.hpp *.dox *.md *.cpp
 USE_MDFILE_AS_MAINPAGE = docs/api_reference.md
 RECURSIVE              = YES
@@ -22,22 +23,26 @@ ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = NO
 EXTRACT_ALL            = YES
-EXTRACT_PRIVATE        = NO
+EXTRACT_PRIVATE        = YES
 EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
 
-# Updated Doxygen configuration for better documentation
-PROJECT_BRIEF          = "Comprehensive documentation for Device OS."
-FULL_PATH_NAMES        = NO
-SORT_MEMBER_DOCS       = YES
-SORT_BRIEF_DOCS        = YES
-GENERATE_SOURCE_BROWSER= YES
-REFERENCES_LINK_SOURCE = YES
+# Improved warnings
 WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = YES
+
+# Enhanced source browsing
+GENERATE_SOURCE_BROWSER= YES
+REFERENCES_LINK_SOURCE = YES
+REFERENCES_RELATION    = YES
 SHOW_USED_FILES        = YES
 SHOW_FILES             = YES
 SHOW_NAMESPACES        = YES
 GENERATE_TAGFILE       = docs/doxygen_output/tags
+
+# Custom aliases for better documentation
 ALIASES                += "note=\par Note:\n"
 ALIASES                += "todo=\par TODO:\n"
+ALIASES                += "bug=\par Bug:\n"
+ALIASES                += "example=\par Example:\n"
