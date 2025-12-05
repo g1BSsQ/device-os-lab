@@ -6,6 +6,9 @@
  */
 
 #include "system.h"
+#include <mutex>
+
+std::mutex system_mutex;
 
 /**
  * @brief Initializes the system.
@@ -15,6 +18,7 @@
  * @return int Returns 0 on success, or an error code on failure.
  */
 int system_init() {
+    std::lock_guard<std::mutex> lock(system_mutex);
     // Implementation here
     return 0;
 }
