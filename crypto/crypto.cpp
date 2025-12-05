@@ -6,6 +6,7 @@
  */
 
 #include "crypto.h"
+#include <iostream>
 #include <string>
 
 /**
@@ -16,8 +17,15 @@
  * @return std::string The encrypted text.
  */
 std::string encrypt(const std::string& plaintext, const std::string& key) {
+    std::cout << "[DEBUG] Encrypting data..." << std::endl;
+    std::cout << "[DEBUG] Plaintext: " << plaintext << std::endl;
+    std::cout << "[DEBUG] Key: " << key << std::endl;
+
     // Example implementation (replace with actual algorithm)
-    return plaintext + key; // Placeholder logic
+    std::string encrypted = plaintext + key; // Placeholder logic
+
+    std::cout << "[DEBUG] Encrypted data: " << encrypted << std::endl;
+    return encrypted;
 }
 
 /**
@@ -28,6 +36,13 @@ std::string encrypt(const std::string& plaintext, const std::string& key) {
  * @return std::string The decrypted text.
  */
 std::string decrypt(const std::string& ciphertext, const std::string& key) {
+    std::cout << "[DEBUG] Decrypting data..." << std::endl;
+    std::cout << "[DEBUG] Ciphertext: " << ciphertext << std::endl;
+    std::cout << "[DEBUG] Key: " << key << std::endl;
+
     // Example implementation (replace with actual algorithm)
-    return ciphertext.substr(0, ciphertext.size() - key.size()); // Placeholder logic
+    std::string decrypted = ciphertext.substr(0, ciphertext.size() - key.size()); // Placeholder logic
+
+    std::cout << "[DEBUG] Decrypted data: " << decrypted << std::endl;
+    return decrypted;
 }
