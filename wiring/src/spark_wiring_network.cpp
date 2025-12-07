@@ -243,6 +243,9 @@ spark::Vector<NetworkInterfaceConfig> NetworkClass::getConfigList() const {
 #endif // HAL_USE_SOCKET_HAL_POSIX
 
 bool NetworkClass::sendWithRetry(const uint8_t* data, size_t size, unsigned retryCount, unsigned retryDelayMs) {
+    if (!data || size == 0) {
+        return false;
+    }
     unsigned retries = 0;
     while (retries < retryCount) {
         if (send(data, size)) { // Assume `send` is a method that sends data
