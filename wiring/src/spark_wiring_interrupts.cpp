@@ -33,12 +33,18 @@ static wiring_interrupt_handler_t* handlers[TOTAL_PINS];
 
 wiring_interrupt_handler_t* allocate_handler(uint16_t pin, wiring_interrupt_handler_t& fn)
 {
+    if (pin >= TOTAL_PINS) {
+        return nullptr;
+    }
     delete handlers[pin];
     return handlers[pin] = new wiring_interrupt_handler_t(fn);
 }
 
 void call_wiring_interrupt_handler(void* data)
 {
+    if (!data) {
+        return;
+    }
     wiring_interrupt_handler_t* handler = (wiring_interrupt_handler_t*)data;
     (*handler)();
 }
@@ -111,6 +117,9 @@ bool attachInterrupt(uint16_t pin, raw_interrupt_handler_t handler, InterruptMod
  *******************************************************************************/
 bool detachInterrupt(uint16_t pin)
 {
+    if (pin >= TOTAL_PINS) {
+        return false;
+    }
     if (SYSTEM_ERROR_NONE != hal_interrupt_detach(pin)) {
         return false;
     }
