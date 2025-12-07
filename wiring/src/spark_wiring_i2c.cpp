@@ -47,6 +47,9 @@ TwoWire::TwoWire(hal_i2c_interface_t i2c, const hal_i2c_config_t& conf)
 //setSpeed() should be called before begin() else default to 100KHz
 void TwoWire::setSpeed(uint32_t clockSpeed)
 {
+    if (clockSpeed == 0) {
+        return;
+    }
   hal_i2c_set_speed(_i2c, clockSpeed, NULL);
 }
 
@@ -68,7 +71,10 @@ void TwoWire::begin(void)
 
 void TwoWire::begin(uint8_t address)
 {
-	hal_i2c_begin(_i2c, I2C_MODE_SLAVE, address, NULL);
+    if (address > 0x7F) {
+        return;
+    }
+        hal_i2c_begin(_i2c, I2C_MODE_SLAVE, address, NULL);
 }
 
 void TwoWire::begin(int address)

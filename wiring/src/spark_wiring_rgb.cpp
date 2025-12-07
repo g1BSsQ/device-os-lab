@@ -26,7 +26,10 @@ RGBClass RGB;
 
 bool RGBClass::controlled(void)
 {
-    return LED_RGB_IsOverRidden();
+    if (!_initialized) {
+        return false;
+    }
+    return !HAL_LED_RGB_IsOverRidden();
 }
 
 void RGBClass::control(bool override)

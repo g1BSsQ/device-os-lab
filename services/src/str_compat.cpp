@@ -20,6 +20,9 @@
 #if PLATFORM_ID == PLATFORM_GCC && defined(__GLIBC__)
 
 size_t strlcpy(char* dest, const char* src, size_t size) {
+    if (!dest || !src) {
+        return 0;
+    }
     auto srcLen = strlen(src);
     if (srcLen + 1 <= size) {
         memcpy(dest, src, srcLen + 1);

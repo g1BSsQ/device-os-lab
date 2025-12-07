@@ -64,7 +64,11 @@ static void Refresh_UnixTime_Cache(time_t unix_time);
 static struct tm Convert_UnixTime_To_CalendarTime(time_t unix_time)
 {
 	struct tm calendar_time;
-	localtime_r(&unix_time, &calendar_time);
+        if (unix_time < 0) {
+            memset(&calendar_time, 0, sizeof(calendar_time));
+            return calendar_time;
+        }
+        localtime_r(&unix_time, &calendar_time);
 	calendar_time.tm_year += 1900;
 	return calendar_time;
 }
@@ -72,6 +76,9 @@ static struct tm Convert_UnixTime_To_CalendarTime(time_t unix_time)
 /* Refresh Unix/RTC time cache */
 static void Refresh_UnixTime_Cache(time_t unix_time)
 {
+    if (unix_time < 0) {
+        return;
+    }
     unix_time += time_zone_cache;
     unix_time += dst_current_cache;
     if(unix_time != unix_time_cache)

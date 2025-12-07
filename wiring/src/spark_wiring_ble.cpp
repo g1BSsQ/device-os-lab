@@ -659,6 +659,9 @@ size_t BleAdvertisingData::append(BleAdvertisingDataType type, const uint8_t* bu
 }
 
 size_t BleAdvertisingData::appendLocalName(const char* name) {
+    if (!name) {
+        return selfData_.size();
+    }
     return append(BleAdvertisingDataType::COMPLETE_LOCAL_NAME, (const uint8_t*)name, strnlen(name, BLE_MAX_DEV_NAME_LEN), false);
 }
 

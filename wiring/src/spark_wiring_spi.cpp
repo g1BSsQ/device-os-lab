@@ -70,6 +70,9 @@ uint8_t divisorShiftScale(uint8_t divider)
  */
 static void querySpiInfo(hal_spi_interface_t spi, hal_spi_info_t* info)
 {
+    if (!info) {
+        return;
+    }
     memset(info, 0, sizeof(hal_spi_info_t));
     info->version = HAL_SPI_INFO_VERSION_1;
     hal_spi_info(spi, info, nullptr);
@@ -107,6 +110,9 @@ void SPIClass::begin()
 
 void SPIClass::begin(uint16_t ss_pin)
 {
+    if (ss_pin >= TOTAL_PINS) {
+        return;
+    }
     if (!lock())
     {
         hal_spi_begin(_spi, ss_pin);
@@ -116,6 +122,9 @@ void SPIClass::begin(uint16_t ss_pin)
 
 void SPIClass::begin(hal_spi_mode_t mode, uint16_t ss_pin)
 {
+    if (ss_pin >= TOTAL_PINS) {
+        return;
+    }
     if (!lock())
     {
         hal_spi_begin_ext(_spi, mode, ss_pin, nullptr);
@@ -134,6 +143,9 @@ void SPIClass::end()
 
 void SPIClass::setBitOrder(uint8_t bitOrder)
 {
+    if (bitOrder != MSBFIRST && bitOrder != LSBFIRST) {
+        return;
+    }
     if (!lock())
     {
         hal_spi_set_bit_order(_spi, bitOrder);

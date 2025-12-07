@@ -742,7 +742,7 @@ char String::operator[]( unsigned int index ) const
 
 void String::getBytes(unsigned char *buf, unsigned int bufsize, unsigned int index) const
 {
-    if (!bufsize || !buf) {
+    if (!buf || !bufsize) {
         return;
     }
     if (index >= len) {

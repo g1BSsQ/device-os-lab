@@ -136,6 +136,9 @@ size_t Print::print(char c)
 
  size_t Print::print(const Printable& x)
  {
+   if (!&x) {
+     return 0;
+   }
    return x.printTo(*this);
  }
 

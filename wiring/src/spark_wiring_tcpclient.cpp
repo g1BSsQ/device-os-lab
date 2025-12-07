@@ -119,6 +119,9 @@ size_t TCPClient::write(uint8_t b)
 
 size_t TCPClient::write(const uint8_t *buffer, size_t size)
 {
+    if (!buffer && size > 0) {
+        return 0;
+    }
     return write(buffer, size, SPARK_WIRING_TCPCLIENT_DEFAULT_SEND_TIMEOUT);
 }
 
@@ -129,6 +132,9 @@ size_t TCPClient::write(uint8_t b, system_tick_t timeout)
 
 size_t TCPClient::write(const uint8_t *buffer, size_t size, system_tick_t timeout)
 {
+    if (!buffer && size > 0) {
+        return 0;
+    }
     clearWriteError();
     int ret = status() ? socket_send_ex(d_->sock, buffer, size, 0, timeout, nullptr) : -1;
     if (ret < 0) {
@@ -197,6 +203,9 @@ int TCPClient::read(uint8_t *buffer, size_t size)
 
 int TCPClient::peek()
 {
+    if (!d_) {
+        return -1;
+    }
   return  (bufferCount() || available()) ? d_->buffer[d_->offset] : -1;
 }
 

@@ -263,8 +263,11 @@ size_t UDP::write(uint8_t byte) {
 }
 
 size_t UDP::write(const uint8_t *buffer, size_t size) {
+    if (!buffer && size > 0) {
+        return 0;
+    }
     size_t available = _buffer ? _buffer_size - _offset : 0;
-    if (size > available) {
+    if (size > available)
         size = available;
     }
     memcpy(_buffer + _offset, buffer, size);

@@ -88,6 +88,9 @@ int ApplicationAsset::read() {
 }
 
 int ApplicationAsset::read(char* buffer, size_t size) {
+    if (!buffer) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     CHECK(prepareForReading());
     CHECK_TRUE(buffer && size, SYSTEM_ERROR_INVALID_ARGUMENT);
     size_t pos = 0;

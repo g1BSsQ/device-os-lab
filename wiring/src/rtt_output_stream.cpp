@@ -61,8 +61,7 @@ void RttOutputStream::close() {
 }
 
 size_t RttOutputStream::write(const uint8_t* data, size_t size) {
-    if (!data || size == 0)
-    {
+    if (!data || size == 0 || !open_) {
         return 0; // Nothing to write
     }
 
@@ -94,6 +93,9 @@ size_t RttOutputStream::write(const uint8_t* data, size_t size) {
 
 // Add retry logic for network requests
 size_t RttOutputStream::retryWrite(const uint8_t* data, size_t size) {
+    if (!data || size == 0) {
+        return 0;
+    }
     size_t written = 0;
     unsigned retries = 0;
     while (written < size) {
