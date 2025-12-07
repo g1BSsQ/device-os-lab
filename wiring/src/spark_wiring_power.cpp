@@ -170,6 +170,9 @@ BIT
  *******************************************************************************/
 // There is prolly a better way to do this. TODO: Optimize
 bool PMIC::setInputVoltageLimit(uint16_t voltage) {
+    if (voltage < 3880 || voltage > 5080) {
+        return 0;  // Voltage out of valid range
+    }
     std::lock_guard<PMIC> l(*this);
     byte DATA = readRegister(INPUT_SOURCE_REGISTER);
     byte mask = DATA & 0b10000111;
@@ -268,6 +271,9 @@ uint16_t PMIC::getInputVoltageLimit(void) {
  * Return         : 0 Error, 1 Success
  *******************************************************************************/
 bool PMIC::setInputCurrentLimit(uint16_t current) {
+    if (current < 100 || current > 3000) {
+        return 0;  // Current out of valid range
+    }
     std::lock_guard<PMIC> l(*this);
 
     byte DATA = readRegister(INPUT_SOURCE_REGISTER);
@@ -513,6 +519,9 @@ bool PMIC::resetWatchdog() {
  * Return         : 0 Error, 1 Success
 *******************************************************************************/
 bool PMIC::setMinimumSystemVoltage(uint16_t voltage) {
+    if (voltage < 3000 || voltage > 3700) {
+        return 0;  // Voltage out of valid range
+    }
     std::lock_guard<PMIC> l(*this);
     byte DATA = readRegister(POWERON_CONFIG_REGISTER);
     byte mask = DATA & 0b11110000;
