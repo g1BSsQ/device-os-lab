@@ -73,6 +73,9 @@ int readWhile(InputStream* strm, unsigned timeout, const ReadFn& readFn) {
 } // unnamed
 
 int readLine(InputStream* strm, char* data, size_t size, unsigned timeout) {
+    if (!strm) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     if (!strm || !data || size == 0) {
         return SYSTEM_ERROR_INVALID_ARGUMENT;
     }
@@ -94,6 +97,9 @@ int readLine(InputStream* strm, char* data, size_t size, unsigned timeout) {
 }
 
 int skipAll(InputStream* strm, unsigned timeout) {
+    if (!strm) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     return readWhile(strm, timeout, [](char c) {
         return true;
     });
