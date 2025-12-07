@@ -96,6 +96,9 @@ XmodemSender::~XmodemSender() {
 }
 
 int XmodemSender::init(Stream* dest, InputStream* src, size_t size) {
+    if (!dest) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     if (!dest || !src)
     {
         return SYSTEM_ERROR_INVALID_ARGUMENT;
