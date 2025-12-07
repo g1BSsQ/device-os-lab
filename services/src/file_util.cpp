@@ -47,7 +47,7 @@ const size_t DUMP_BYTES_PER_LINE = 16;
 const size_t MAX_PATH_LEN = 255;
 
 void dumpLine(const char* data, size_t size, size_t offs) {
-    if (size == 0) {
+    if (!data || size == 0) {
         return;
     }
     if (size > DUMP_BYTES_PER_LINE) {

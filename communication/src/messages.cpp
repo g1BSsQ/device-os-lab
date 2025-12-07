@@ -36,7 +36,7 @@ const unsigned GOODBYE_NETWORK_DISCONNECT_REASON_FLAG = 0x08;
 
 CoAPMessageType::Enum Messages::decodeType(const uint8_t* buf, size_t length)
 {
-    if (length<4)
+    if (!buf || length < 4)
         return CoAPMessageType::ERROR;
 
     char path = 0;

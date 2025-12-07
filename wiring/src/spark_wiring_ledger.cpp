@@ -159,10 +159,16 @@ struct LedgerAppData {
 };
 
 void destroyLedgerAppData(void* appData) {
+    if (!appData) {
+        return;
+    }
     delete static_cast<LedgerAppData*>(appData);
 }
 
 LedgerAppData* getLedgerAppData(ledger_instance* ledger) {
+    if (!ledger) {
+        return nullptr;
+    }
     auto appData = static_cast<LedgerAppData*>(ledger_get_app_data(ledger, nullptr));
     if (!appData) {
         ledger_lock(ledger, nullptr);
@@ -389,9 +395,9 @@ int Ledger::getNames(Vector<String>& namesVec) {
     char** names = nullptr;
     size_t count = 0;
     int r = ledger_get_names(&names, &count, nullptr);
-    if (r < 0) {
+    if (r < 0 || !names) {
         LOG(ERROR, "ledger_get_names() failed: %d", r);
-        return r;
+        return r < 0 ? r : SYSTEM_ERROR_INVALID_STATE;
     }
     SCOPE_GUARD({
         for (size_t i = 0; i < count; ++i) {

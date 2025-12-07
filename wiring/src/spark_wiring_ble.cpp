@@ -1457,6 +1457,9 @@ ssize_t BleCharacteristic::getValue(uint8_t* buf, size_t len) const {
 }
 
 ssize_t BleCharacteristic::getValue(String& str) const {
+    if (BLE_MAX_ATTR_VALUE_PACKET_SIZE == 0) {
+        return 0;
+    }
     char* buf = (char*)malloc(BLE_MAX_ATTR_VALUE_PACKET_SIZE);
     if (buf) {
         SCOPE_GUARD ({
@@ -2300,6 +2303,9 @@ int BleLocalDevice::advertise(BleAdvertisingData& advertisingData, BleAdvertisin
 }
 
 int BleLocalDevice::advertise(const iBeacon& beacon) const {
+    if (!beacon.UUID().isValid()) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     BleAdvertisingData* advData = new(std::nothrow) BleAdvertisingData(beacon);
     SCOPE_GUARD ({
         if (advData) {
@@ -2532,6 +2538,9 @@ private:
                 return false;
             }
             if (srLen == filterCustomDatalen) {
+                if (srLen == 0) {
+                    return false;
+                }
                 uint8_t* buf = (uint8_t*)malloc(srLen);
                 SCOPE_GUARD({
                     if (buf) {
@@ -2548,6 +2557,9 @@ private:
                 }
             }
             if (advLen == filterCustomDatalen) {
+                if (advLen == 0) {
+                    return false;
+                }
                 uint8_t* buf = (uint8_t*)malloc(advLen);
                 SCOPE_GUARD({
                     if (buf) {

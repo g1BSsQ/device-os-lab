@@ -36,6 +36,9 @@ namespace particle { namespace protocol {
 ProtocolError ChunkedTransfer::handle_update_begin(
         token_t token, Message& message, MessageChannel& channel)
 {
+    if (!message.buf()) {
+        return ProtocolError::MALFORMED_MESSAGE;
+    }
     LOG(INFO, "Received UpdateBegin");
     uint8_t flags = 0;
     chunk_count = 0;

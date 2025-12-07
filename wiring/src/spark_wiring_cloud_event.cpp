@@ -647,6 +647,9 @@ int CloudEvent::read(char* data, size_t size) {
 }
 
 int CloudEvent::peek(char* data, size_t size) {
+    if (!data && size > 0) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     if (!isReadable()) {
         return error();
     }

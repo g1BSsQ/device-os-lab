@@ -14,12 +14,8 @@ int hal_gpio_toggle(hal_pin_t pin) {
 }
 
 int hal_gpio_pulse(hal_pin_t pin, uint32_t duration_ms) {
-    if (!hal_pin_validate(pin)) {
-        return -1; // Invalid pin
-    }
-    if (duration_ms == 0)
-    {
-        return -1; // Invalid duration
+    if (!hal_pin_validate(pin) || duration_ms == 0) {
+        return -1;  // Invalid pin or duration
     }
     pinMode(pin, OUTPUT);
     digitalWrite(pin, HIGH);

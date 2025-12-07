@@ -22,6 +22,9 @@ void particle::detail::futureCallbackWrapper(void* data) {
         return;
     }
     auto callbackPtr = static_cast<const std::function<void()>*>(data);
+    if (!callbackPtr) {
+        return;
+    }
     (*callbackPtr)();
     delete callbackPtr;
 }

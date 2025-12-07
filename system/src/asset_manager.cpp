@@ -76,6 +76,9 @@ int parseAssetDependencies(Vector<Asset>& assets, hal_storage_id storageId, uint
 }
 
 int parseAssetInfo(InputStream* stream, size_t size, Asset& asset) {
+    if (!stream) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     if (!stream || size == 0)
     {
         return SYSTEM_ERROR_INVALID_ARGUMENT;
