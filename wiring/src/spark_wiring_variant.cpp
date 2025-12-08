@@ -184,6 +184,9 @@ int appendKeyValueArray(VariantArray& arr, Variant key, Variant val) {
 }
 
 int readAndAppendToString(DecodingStream& stream, size_t size, String& str) {
+    if (size == 0) {
+        return 0;
+    }
     if (!str.reserve(str.length() + size)) {
         return Error::NO_MEMORY;
     }
