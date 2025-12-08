@@ -110,7 +110,7 @@ void SPIClass::begin()
 
 void SPIClass::begin(uint16_t ss_pin)
 {
-    if (ss_pin >= TOTAL_PINS) {
+    if (ss_pin >= TOTAL_PINS || !pinAvailable(ss_pin)) {
         return;
     }
     if (!lock())
@@ -122,7 +122,7 @@ void SPIClass::begin(uint16_t ss_pin)
 
 void SPIClass::begin(hal_spi_mode_t mode, uint16_t ss_pin)
 {
-    if (ss_pin >= TOTAL_PINS) {
+    if (ss_pin >= TOTAL_PINS || !pinAvailable(ss_pin)) {
         return;
     }
     if (!lock())

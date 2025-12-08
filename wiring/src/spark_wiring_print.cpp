@@ -134,13 +134,9 @@ size_t Print::print(char c)
   return write(c);
 }
 
- size_t Print::print(const Printable& x)
- {
-   if (!&x) {
-     return 0;
-   }
-   return x.printTo(*this);
- }
+size_t Print::print(const Printable& x) {
+    return x.printTo(*this);
+}
 
 size_t Print::print(const __FlashStringHelper* str)
 {

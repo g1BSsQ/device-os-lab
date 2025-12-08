@@ -48,6 +48,9 @@ bool Servo::attach(uint16_t pin,
     int16_t minAngle,
     int16_t maxAngle)
 {
+    if (pin >= TOTAL_PINS) {
+        return false;
+    }
     // Validate pulse width parameters
     if (minPW >= maxPW || minAngle >= maxAngle)
     {

@@ -108,7 +108,7 @@ int Esp32SdioStream::write(const char* data, size_t size) {
     if (!enabled_) {
         return SYSTEM_ERROR_INVALID_STATE;
     }
-    if (size == 0) {
+    if (!data || size == 0) {
         return 0;
     }
 

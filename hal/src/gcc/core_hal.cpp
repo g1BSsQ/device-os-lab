@@ -494,6 +494,9 @@ SessionPersistDataOpaque session;
 
 int HAL_System_Backup_Save(size_t offset, const void* buffer, size_t length, void* reserved)
 {
+    if (!buffer) {
+        return -1;
+    }
     if (offset==0 && length==sizeof(SessionPersistDataOpaque))
     {
         memcpy(&session, buffer, length);
@@ -504,6 +507,9 @@ int HAL_System_Backup_Save(size_t offset, const void* buffer, size_t length, voi
 
 int HAL_System_Backup_Restore(size_t offset, void* buffer, size_t max_length, size_t* length, void* reserved)
 {
+    if (!buffer || !length) {
+        return -1;
+    }
     if (offset==0 && max_length>=sizeof(SessionPersistDataOpaque) && session.size==sizeof(SessionPersistDataOpaque))
     {
         *length = sizeof(SessionPersistDataOpaque);

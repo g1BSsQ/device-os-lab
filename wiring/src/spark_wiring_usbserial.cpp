@@ -83,6 +83,9 @@ size_t USBSerial::write(uint8_t byte)
     if (!isEnabled()) {
         return 0;
     }
+    if (_serial >= HAL_USB_USART_SERIAL_MAX) {
+        return 0;
+    }
   if (HAL_USB_USART_Available_Data_For_Write(_serial) > 0 || _blocking) {
     return std::max(0, (int)HAL_USB_USART_Send_Data(_serial, byte));
   }

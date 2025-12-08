@@ -259,6 +259,9 @@ bool String::resize(size_t size) {
 
 unsigned char String::changeBuffer(unsigned int maxStrLen)
 {
+    if (maxStrLen == 0 || maxStrLen > 65535) {  // Reasonable string size limit
+        return 0;
+    }
     char *newbuffer = (char *)realloc(buffer, maxStrLen + 1);
     if (newbuffer) {
         buffer = newbuffer;

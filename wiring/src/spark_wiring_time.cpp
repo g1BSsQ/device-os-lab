@@ -68,6 +68,10 @@ static struct tm Convert_UnixTime_To_CalendarTime(time_t unix_time)
             memset(&calendar_time, 0, sizeof(calendar_time));
             return calendar_time;
         }
+        if (unix_time > 2147483647) {  // Max 32-bit timestamp (year 2038)
+            memset(&calendar_time, 0, sizeof(calendar_time));
+            return calendar_time;
+        }
         localtime_r(&unix_time, &calendar_time);
 	calendar_time.tm_year += 1900;
 	return calendar_time;
