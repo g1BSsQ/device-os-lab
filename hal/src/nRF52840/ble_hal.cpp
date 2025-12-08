@@ -914,6 +914,9 @@ int BleObject::BleGap::addWhitelist(const hal_ble_addr_t* addrList, size_t len) 
     CHECK_TRUE(addrList, SYSTEM_ERROR_INVALID_ARGUMENT);
     CHECK_TRUE(len, SYSTEM_ERROR_INVALID_ARGUMENT);
     CHECK_TRUE(len <= BLE_MAX_WHITELIST_ADDR_COUNT, SYSTEM_ERROR_INVALID_ARGUMENT);
+    if (len > 128) {  // Additional safety check
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     ble_gap_addr_t* whitelist = (ble_gap_addr_t*)malloc(sizeof(ble_gap_addr_t) * len);
     CHECK_TRUE(whitelist, SYSTEM_ERROR_NO_MEMORY);
     SCOPE_GUARD ({
@@ -2777,6 +2780,9 @@ int BleObject::GattServer::addCharacteristic(const hal_ble_char_init_t* charInit
     valueAttrMd.vlen = 1;
     // Characteristic value attribute
     CHECK(BleObject::toPlatformUUID(&charInit->uuid, &charUuid));
+    if (BLE_MAX_ATTR_VALUE_PACKET_SIZE == 0 || BLE_MAX_ATTR_VALUE_PACKET_SIZE > 4096) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     uint8_t* charValue = (uint8_t*)malloc(BLE_MAX_ATTR_VALUE_PACKET_SIZE);
     CHECK_TRUE(charValue, SYSTEM_ERROR_NO_MEMORY);
     charValueAttr.p_uuid = &charUuid;
