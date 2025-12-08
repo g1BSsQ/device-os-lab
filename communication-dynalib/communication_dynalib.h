@@ -24,3 +24,10 @@ void communication_dynalib_init();
  * @return int Returns 0 on success, or -1 on failure.
  */
 int communication_dynalib_send(const char* data, size_t length);
+
+/**
+ * @brief Get error string for communication error code (dynalib).
+ * @param code Error code.
+ * @return const char* Error string.
+ */
+const char* communication_dynalib_error_str(int code);
