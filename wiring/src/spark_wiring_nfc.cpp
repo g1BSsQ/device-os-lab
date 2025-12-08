@@ -27,9 +27,12 @@ size_t Record::getEncodedData(Vector<uint8_t>& vector) const {
 }
 
 TextRecord::TextRecord(const char* text, const char* encoding) {
-    if (text == nullptr || encoding == nullptr || text[0] == '\0')
-    {
+    if (text == nullptr || encoding == nullptr) {
         LOG(ERROR, "Invalid text or encoding parameter");
+        return;
+    }
+    if (text[0] == '\0') {
+        LOG(ERROR, "Empty text parameter");
         return;
     }
 
