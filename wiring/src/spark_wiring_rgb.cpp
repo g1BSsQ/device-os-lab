@@ -64,6 +64,9 @@ void RGBClass::color(int red, int green, int blue)
 
 void RGBClass::brightness(uint8_t brightness, bool update)
 {
+    if (!_initialized) {
+        return;
+    }
     LED_SetBrightness(brightness);
     if (controlled() && update) {
         LED_On(PARTICLE_LED_RGB);
