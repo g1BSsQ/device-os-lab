@@ -1,8 +1,10 @@
 #include "main/config.h"
 #include "services/services.h"
+#include "system.h"
 #include <iostream>
 
 int main() {
+    system_init();
     DeviceConfig config;
     if (!config.load("device.cfg")) {
         std::cout << "No config found, creating default." << std::endl;
@@ -14,5 +16,6 @@ int main() {
     std::cout << "Mode: " << config.get("mode") << std::endl;
     Service::initialize();
     Service::execute();
+    system_kick_watchdog();
     return 0;
 }
