@@ -9,13 +9,15 @@
 std::mutex service_mutex;
 
 void Service::initialize() {
-    std::lock_guard<std::mutex> lock(service_mutex);
+    sync_lock();
     // Initialize service components
     log_info("Service initialized successfully.");
+    sync_unlock();
 }
 
 void Service::execute() {
-    std::lock_guard<std::mutex> lock(service_mutex);
+    sync_lock();
     // Execute service logic
     log_info("Service executed successfully.");
+    sync_unlock();
 }

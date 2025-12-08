@@ -2,6 +2,7 @@
 #define SERVICES_H
 
 #include "logger.h"
+#include "sync.h"
 
 class Service {
 public:
