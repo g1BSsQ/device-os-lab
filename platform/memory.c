@@ -1,31 +1,39 @@
-#include <cstdlib>
-#include <iostream>
-#include <vector>
 
-// Simple memory tracker for demonstration
-static std::vector<void*> allocations;
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+// Đơn giản quản lý các con trỏ đã cấp phát
+static void* allocations[1024];
+static size_t alloc_count = 0;
 
 void* platform_malloc(size_t size) {
-    void* ptr = std::malloc(size);
-    if (ptr) allocations.push_back(ptr);
+    void* ptr = malloc(size);
+    if (ptr && alloc_count < 1024) {
+        allocations[alloc_count++] = ptr;
+    }
     return ptr;
 }
 
 void platform_free(void* ptr) {
     if (ptr) {
-        std::free(ptr);
-        auto it = std::find(allocations.begin(), allocations.end(), ptr);
-        if (it != allocations.end()) allocations.erase(it);
+        free(ptr);
+        for (size_t i = 0; i < alloc_count; ++i) {
+            if (allocations[i] == ptr) {
+                allocations[i] = allocations[--alloc_count];
+                break;
+            }
+        }
     }
-}
-
-void platform_memory_cleanup() {
-    for (void* ptr : allocations) {
-        std::free(ptr);
-    }
-    allocations.clear();
 }
 
 size_t platform_memory_leak_count() {
-    return allocations.size();
+    return alloc_count;
+}
+
+void platform_memory_cleanup() {
+    for (size_t i = 0; i < alloc_count; ++i) {
+        free(allocations[i]);
+    }
+    alloc_count = 0;
 }
