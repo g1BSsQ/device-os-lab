@@ -12,6 +12,7 @@ int main() {
 
     // Khởi tạo thiết bị
     device_init();
+    hal_device_init();
 
     // Kiểm tra kết nối mạng
     if (check_network_connectivity()) {
