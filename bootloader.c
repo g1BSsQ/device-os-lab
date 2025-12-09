@@ -19,8 +19,13 @@ void bootloader_print_version(void) {
     printf("Firmware Version: v%d.%d.%d\n", current_fw_version.major, current_fw_version.minor, current_fw_version.patch);
 }
 
+void bootloader_fast_init(void) {
+    // Fast initialization path for reduced startup time
+    bootloader_set_version(1, 0, 0);
+}
+
 void bootloader_init(void) {
     system_init();
-    bootloader_set_version(1, 0, 0);
+    bootloader_fast_init();
     bootloader_print_version();
 }

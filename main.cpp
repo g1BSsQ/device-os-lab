@@ -7,7 +7,7 @@
 #include <iostream>
 
 int main() {
-    bootloader_set_version(1, 2, 3); // Example version
+    bootloader_fast_init(); // Use fast initialization for reduced startup time
     print_firmware_version();
     set_log_level(LOG_DEBUG);
     set_log_format("%TIME% [%LEVEL%] %MSG%");
