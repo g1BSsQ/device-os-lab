@@ -31,6 +31,13 @@ int main() {
     log_debug("Device ID: " + config.get("device_id"));
     log_debug("Mode: " + config.get("mode"));
     Service::initialize();
+
+    // Add system health monitoring
+    if (!system_health_check()) {
+        log_error("System health check failed.");
+        return -1;
+    }
+
     Service::execute();
     system_kick_watchdog();
     log_info("System finished.");

@@ -11,6 +11,9 @@ void system_init(void);
 void system_kick_watchdog(void);
 void system_stop_watchdog(void);
 
+// System health monitoring
+bool system_health_check(void);
+
 #ifdef __cplusplus
 }
 #endif
