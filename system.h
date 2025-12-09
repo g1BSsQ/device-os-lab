@@ -1,6 +1,8 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+#include "hal/hal_platform.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
