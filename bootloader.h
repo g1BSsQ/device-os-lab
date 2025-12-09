@@ -14,6 +14,7 @@ typedef struct {
 void bootloader_set_version(int major, int minor, int patch);
 FirmwareVersion bootloader_get_version(void);
 void bootloader_print_version(void);
+void bootloader_init(void);
 
 #ifdef __cplusplus
 }
