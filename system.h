@@ -5,6 +5,7 @@
 #include "logging.h"
 #include "bootloader.h"
 #include "crypto.h"
+#include "hal/hal_thread.h"
 
 #ifdef __cplusplus
 extern "C" {
