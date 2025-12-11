@@ -3,6 +3,7 @@
 
 #include "hal/hal_platform.h"
 #include "logging.h"
+#include "bootloader.h"
 
 #ifdef __cplusplus
 extern "C" {
