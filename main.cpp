@@ -6,6 +6,7 @@
 #include "module_data.h"
 #include "logging.h"
 #include "dynalib.h"
+#include "communication/protocol.h"
 #include <iostream>
 
 int main() {
@@ -16,6 +17,12 @@ int main() {
     set_log_level(LOG_DEBUG);
     set_log_format("%TIME% [%LEVEL%] %MSG%");
     log_info("System starting...");
+
+    Protocol protocol;
+    protocol.initialize();
+    protocol.send("Hello, Protocol!");
+    std::string response = protocol.receive();
+    log_info("Protocol response: " + response);
 
     try {
         void* lib = dynalib_load("example_library");
