@@ -8,6 +8,7 @@
 #include "dynalib.h"
 #include "communication/protocol.h"
 #include "hal/watchdog.h"
+#include "config/config.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -28,9 +29,27 @@ void execute_with_watchdog(const std::function<void()>& task) {
 int main() {
     HAL_Status status = HAL_SUCCESS;
 
+    Config config;
+    if (!config.load("config.json")) {
+        log_error("Failed to load configuration file.");
+        return -1;
+    }
+
+    std::string log_level = config.get("log_level", "INFO");
+    if (log_level == "DEBUG") {
+        set_log_level(LOG_DEBUG);
+    } else if (log_level == "INFO") {
+        set_log_level(LOG_INFO);
+    } else if (log_level == "WARN") {
+        set_log_level(LOG_WARN);
+    } else if (log_level == "ERROR") {
+        set_log_level(LOG_ERROR);
+    }
+
+    log_info("Configuration loaded successfully.");
+
     bootloader_initialize(); // Use the refactored initialization logic
     print_firmware_version();
-    set_log_level(LOG_DEBUG);
     set_log_format("%TIME% [%LEVEL%] %MSG%");
     log_info("System starting...");
 
@@ -58,8 +77,8 @@ int main() {
         return status;
     }
 
-    DeviceConfig config;
-    if (!config.load("device.cfg")) {
+    DeviceConfig device_config;
+    if (!device_config.load("device.cfg")) {
         log_error("Failed to load device configuration.");
         return -1;
     }
