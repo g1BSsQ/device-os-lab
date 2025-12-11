@@ -32,7 +32,7 @@ jobs:
       - run:
           name: "Install Dependencies"
           command: |
-            sudo apt-get update && sudo apt-get install -y build-essential
+            sudo apt-get update && sudo apt-get install -y build-essential clang-format
       - save_cache:
           paths:
             - /usr/local/bin
@@ -48,6 +48,10 @@ jobs:
           root: ~/workspace
           paths:
             - tested-platforms
+      - run:
+          name: "Run Style Checks"
+          command: |
+            clang-format --dry-run --Werror $(find . -name '*.cpp' -o -name '*.h')
   validate-toolchain-platforms:
     machine:
       image: ubuntu-2004:current

@@ -1,8 +1,6 @@
-This is the beginning of the style guide for the Particle Device OS repository.
-It's presently just an outline and will be fleshed out over time.
+# Style Guide
 
-Note that it will be easy to find violations of these guidelines in the existing codebase.
-Over time, these will be rectified as automated checks for style consistency are introduced.
+This document outlines the coding style guidelines for the Particle Device OS repository. Adhering to these guidelines ensures consistency and readability across the codebase.
 
 ## Introduction
 
@@ -139,3 +137,28 @@ The code guidelines [here](http://stroustrup.com/JSF-AV-rules.pdf) offer some go
 - Use the imperative mood ("Add feature" not "Adds feature").
 - Limit the subject line to 72 characters.
 - Include references to issues or pull requests when applicable.
+
+## Automated Style Checks
+
+### CI Integration
+
+The CI pipeline includes a step to enforce style consistency using `clang-format`. Any code that does not adhere to the style rules will cause the CI pipeline to fail.
+
+### Running Style Checks Locally
+
+To check your code for style violations locally, run the following command:
+
+```bash
+clang-format --dry-run --Werror $(find . -name '*.cpp' -o -name '*.h')
+```
+
+### Enforced Rules
+
+The following rules are enforced by the `.clang-format` configuration:
+
+- **Column Limit**: 80 characters.
+- **Indentation**: 4 spaces, no tabs.
+- **Brace Style**: Attach braces to the preceding line.
+- **Alignment**: Align trailing comments and escaped newlines.
+
+Refer to the `.clang-format` file for the complete list of enforced rules.

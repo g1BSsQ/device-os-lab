@@ -9,14 +9,14 @@ AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortBlocksOnASingleLine: false
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: InlineOnly
+AllowShortFunctionsOnASingleLine: None
 AlwaysBreakTemplateDeclarations: true
 AlwaysBreakBeforeMultilineStrings: true
 BreakBeforeBinaryOperators: true
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializersBeforeComma: true
 BinPackParameters: false
-ColumnLimit:     100
+ColumnLimit:     80
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
 DerivePointerAlignment: false
 ExperimentalAutoDetectBinPacking: false
@@ -39,7 +39,7 @@ SpacesBeforeTrailingComments: 2
 Cpp11BracedListStyle: true
 Standard:        Cpp11
 IndentWidth:     4
-TabWidth:        8
+TabWidth:        4
 UseTab:          Never
 BreakBeforeBraces: Attach
 SpacesInParentheses: false
