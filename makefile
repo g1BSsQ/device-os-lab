@@ -49,6 +49,12 @@ docs:
 	@echo "Generating documentation..."
 	doxygen Doxyfile
 
+# Cross-compilation support
+CROSS_COMPILE ?= arm-none-eabi-
+CC := $(CROSS_COMPILE)gcc
+CXX := $(CROSS_COMPILE)g++
+LD := $(CROSS_COMPILE)ld
+
 include $(COMMON_BUILD)/common-tools.mk
 include $(COMMON_BUILD)/recurse.mk
 include $(COMMON_BUILD)/verbose.mk
