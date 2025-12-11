@@ -5,6 +5,7 @@
 #include "bootloader.h"
 #include "module_data.h"
 #include "logging.h"
+#include "dynalib.h"
 #include <iostream>
 
 int main() {
@@ -15,6 +16,16 @@ int main() {
     set_log_level(LOG_DEBUG);
     set_log_format("%TIME% [%LEVEL%] %MSG%");
     log_info("System starting...");
+
+    try {
+        void* lib = dynalib_load("example_library");
+        void (*example_function)() = (void (*)())dynalib_get_symbol(lib, "example_function");
+        example_function();
+        dynalib_unload(lib);
+    } catch (const std::exception& e) {
+        log_error(std::string("Dynamic library error: ") + e.what());
+        return -1;
+    }
 
     status = system_init();
     if (status != HAL_SUCCESS) {
