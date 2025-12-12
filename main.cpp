@@ -13,6 +13,7 @@
 #include <thread>
 #include <chrono>
 #include <functional>
+#include <future>
 
 void execute_with_watchdog(const std::function<void()>& task) {
     try {
@@ -53,7 +54,7 @@ int main() {
     print_firmware_version();
     log_info("System starting...");
 
-    execute_with_watchdog([]() {
+    auto protocol_task = std::async(std::launch::async, []() {
         Protocol protocol;
         protocol.initialize();
         protocol.send("Hello, Protocol!");
@@ -84,5 +85,9 @@ int main() {
     }
 
     log_info("System initialized successfully.");
+
+    // Ensure the protocol task completes before exiting
+    protocol_task.wait();
+
     return 0;
 }
