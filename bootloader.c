@@ -40,8 +40,16 @@ void bootloader_secure_boot(void) {
 }
 
 void bootloader_init(void) {
-    system_init();
-    bootloader_secure_boot();
+    if (system_init() != 0) {
+        printf("Error: System initialization failed\n");
+        return;
+    }
+
+    if (!bootloader_secure_boot()) {
+        printf("Error: Secure boot failed\n");
+        return;
+    }
+
     bootloader_fast_init();
     bootloader_print_version();
 }
