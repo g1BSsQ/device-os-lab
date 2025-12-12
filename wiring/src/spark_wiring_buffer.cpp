@@ -22,6 +22,9 @@
 namespace particle {
 
 Buffer Buffer::slice(size_t pos, size_t size) const {
+    if (size == 0) {
+        return Buffer();
+    }
     if (pos > (size_t)d_.size()) {
         pos = d_.size();
     }
@@ -71,6 +74,9 @@ Buffer Buffer::fromHex(const char* str, size_t len) {
     if (!str || len == 0)
     {
         return Buffer(); // Invalid input
+    }
+    if (len % 2 != 0) {
+        return Buffer();  // Hex string must have even length
     }
 
     Buffer buf;
