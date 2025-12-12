@@ -86,3 +86,57 @@ bool system_health_check() {
     std::cout << "Performing system health check..." << std::endl;
     return true; // Assume the system is healthy
 }
+
+static ModuleVersion currentModuleVersion = {1, 0, 0};
+
+/**
+ * @brief Sets the module version.
+ *
+ * This function sets the module version to the specified major, minor,
+ * and patch values.
+ *
+ * @param major The major version number.
+ * @param minor The minor version number.
+ * @param patch The patch version number.
+ */
+void set_module_version(int major, int minor, int patch) {
+    currentModuleVersion.major = major;
+    currentModuleVersion.minor = minor;
+    currentModuleVersion.patch = patch;
+}
+
+/**
+ * @brief Retrieves the current module version.
+ *
+ * This function returns the current module version as a ModuleVersion
+ * structure.
+ *
+ * @return The current module version.
+ */
+ModuleVersion get_module_version() {
+    return currentModuleVersion;
+}
+
+/**
+ * @brief Retrieves the module version as a string.
+ *
+ * This function converts the current module version into a human-readable
+ * string format.
+ *
+ * @return A string representation of the module version.
+ */
+std::string get_module_version_string() {
+    return "v" + std::to_string(currentModuleVersion.major) + "." +
+           std::to_string(currentModuleVersion.minor) + "." +
+           std::to_string(currentModuleVersion.patch);
+}
+
+/**
+ * @brief Prints the module version to the console.
+ *
+ * This function retrieves the module version and prints it to the
+ * standard output for debugging or informational purposes.
+ */
+void print_module_version() {
+    std::cout << "Module Version: " << get_module_version_string() << std::endl;
+}

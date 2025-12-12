@@ -6,6 +6,46 @@
 #include "bootloader.h"
 
 /**
+ * @brief Structure to hold module version information.
+ *
+ * This structure contains fields for storing the major, minor, and patch
+ * version numbers of the module.
+ */
+struct ModuleVersion {
+    int major; ///< The major version number.
+    int minor; ///< The minor version number.
+    int patch; ///< The patch version number.
+};
+
+/**
+ * @brief Sets the module version.
+ *
+ * @param major The major version number to set.
+ * @param minor The minor version number to set.
+ * @param patch The patch version number to set.
+ */
+void set_module_version(int major, int minor, int patch);
+
+/**
+ * @brief Retrieves the module version.
+ *
+ * @return The current module version.
+ */
+ModuleVersion get_module_version();
+
+/**
+ * @brief Retrieves the module version as a string.
+ *
+ * @return A string representation of the module version.
+ */
+std::string get_module_version_string();
+
+/**
+ * @brief Prints the module version to the console.
+ */
+void print_module_version();
+
+/**
  * @brief Structure to hold module data.
  *
  * This structure contains fields for storing module-specific data such
