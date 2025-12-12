@@ -137,6 +137,9 @@ namespace spark {
         {
             return 0;
         }
+        if (result_count > 256) {  // Reasonable upper limit
+            result_count = 256;
+        }
         APScan apScan(results, result_count);
         return apScan.start();
     }
