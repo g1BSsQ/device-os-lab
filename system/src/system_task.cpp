@@ -82,6 +82,12 @@ unsigned char _auth = WLAN_SEC_WPA2;
 
 unsigned char wlan_profile_index;
 
+void validate_auth_type(unsigned char& auth) {
+    if (auth > WLAN_SEC_WPA2) {
+        auth = WLAN_SEC_WPA2;
+    }
+}
+
 volatile uint8_t Spark_Error_Count;
 volatile uint8_t SYSTEM_POWEROFF;
 uint8_t feature_cloud_udp = 0;
@@ -133,7 +139,7 @@ public:
     }
 
     void start(uint32_t color, uint8_t count) {
-        if (count > 0) {
+        if (count > 0 && count <= 10) {  // Limit to prevent excessive blinking
             setActive(false);
             count_ = count;
             setColor(color);
