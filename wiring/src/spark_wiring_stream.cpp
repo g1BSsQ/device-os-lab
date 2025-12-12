@@ -34,6 +34,9 @@
 // private method to read stream with timeout
 int Stream::timedRead()
 {
+    if (_timeout == 0) {
+        return read();  // No timeout
+    }
   int c;
   _startMillis = millis();
   do {
@@ -88,12 +91,18 @@ int Stream::peekNextDigit()
 
 void Stream::setTimeout(system_tick_t timeout)  // sets the maximum number of milliseconds to wait
 {
+    if (timeout > 60000) {  // Cap at 60 seconds
+        timeout = 60000;
+    }
   _timeout = timeout;
 }
 
  // find returns true if the target string is found
 bool  Stream::find(char *target)
 {
+    if (!target) {
+        return false;
+    }
   return findUntil(target, NULL);
 }
 
