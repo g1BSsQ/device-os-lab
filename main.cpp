@@ -46,11 +46,11 @@ int main() {
         set_log_level(LOG_ERROR);
     }
 
+    set_log_format("%TIME% [%LEVEL%] %MSG%");
     log_info("Configuration loaded successfully.");
 
     bootloader_initialize(); // Use the refactored initialization logic
     print_firmware_version();
-    set_log_format("%TIME% [%LEVEL%] %MSG%");
     log_info("System starting...");
 
     execute_with_watchdog([]() {
