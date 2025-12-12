@@ -122,6 +122,9 @@ void CloudClass::call_wiring_event_handler(const void* handler_data, const char 
 
 bool CloudClass::register_function(cloud_function_t fn, void* data, const char* funcKey)
 {
+    if (!fn || !funcKey) {
+        return false;
+    }
     cloud_function_descriptor desc = {};
     desc.size = sizeof(desc);
     desc.fn = fn;
@@ -132,7 +135,7 @@ bool CloudClass::register_function(cloud_function_t fn, void* data, const char* 
 
 Future<bool> CloudClass::publish_event(const char* name, const char* data, size_t size, int type, int ttl,
         PublishFlags flags) {
-    if (!connected()) {
+    if (!name || !connected()) {
         return Future<bool>(Error::INVALID_STATE);
     }
     spark_send_event_data d = {};
