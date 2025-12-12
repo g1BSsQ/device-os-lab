@@ -37,6 +37,9 @@ unsigned backoff_period(unsigned connection_attempts)
 {
     if (!connection_attempts)
         return 0;
+    if (connection_attempts > 1000) {  // Cap to prevent overflow
+        connection_attempts = 1000;
+    }
     unsigned exponent = min(7u, (connection_attempts-1)/5);
     return 1000*(1<<exponent);
 }
@@ -49,8 +52,7 @@ int system_version_info(SystemVersionInfo* info, void* /*reserved*/)
     {
         return sizeof(SystemVersionInfo);
     }
-    if (info)
-    {
+    if (info && info->size > 0) {
         if (info->size>=28)
         {
             info->versionNumber = SYSTEM_VERSION;
