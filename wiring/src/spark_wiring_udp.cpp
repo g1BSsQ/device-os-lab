@@ -141,6 +141,9 @@ int UDP::beginPacket(const char *host, uint16_t port)
 
 int UDP::beginPacket(IPAddress ip, uint16_t port)
 {
+    if (port == 0) {
+        return 0;
+    }
     // default behavior previously was to use a 512 byte buffer, so instantiate that if not already done
     if (!_buffer && _buffer_size) {
         setBuffer(_buffer_size);
