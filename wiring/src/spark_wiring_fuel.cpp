@@ -118,6 +118,10 @@ float FuelGauge::getVCell() {
     byte MSB = 0;
     byte LSB = 0;
 
+    // Validate register address is within valid range
+    if (VCELL_REGISTER > 0x1F) {  // MAX17043 has registers 0x00-0x1F
+        return -1.0f;
+    }
     int result = readRegister(VCELL_REGISTER, MSB, LSB);
     if (result != SYSTEM_ERROR_NONE)
     {
