@@ -104,11 +104,16 @@ size_t USARTSerial::write(uint8_t c)
     if (!isEnabled()) {
         return 0;
     }
-  // attempt a write if blocking, or for non-blocking if there is room.
-  if (_blocking || hal_usart_available_data_for_write(_serial) > 0) {
-    // the HAL always blocks.
-	  return hal_usart_write(_serial, c);
-  }
+    // Validate buffer availability to prevent data corruption
+    if (_blocking) {
+        // attempt a write if blocking, or for non-blocking if there is room.
+        if (_blocking || hal_usart_available_data_for_write(_serial) > 0) {
+            // the HAL always blocks.
+            return hal_usart_write(_serial, c);
+        }
+    } else if (hal_usart_available_data_for_write(_serial) > 0) {
+        return hal_usart_write(_serial, c);
+    }
   return 0;
 }
 
