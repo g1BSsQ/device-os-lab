@@ -31,6 +31,12 @@ particle::LEDStatus::LEDStatus(uint32_t color, LEDPattern pattern, uint16_t peri
         d_.callback = updateCallback; // User callback
         d_.data = this; // Callback data
     } else {
+        // Cap period to reasonable range
+        if (period == 0) {
+            period = 1;
+        } else if (period > 60000) {
+            period = 60000;
+        }
         d_.period = period;
     }
 }
@@ -52,6 +58,13 @@ void setCustomLEDBlinkPattern(const char* pattern) {
     if (!pattern || pattern[0] == '\0')
     {
         Log.error("Invalid LED pattern: null or empty");
+        return;
+    }
+    // Limit pattern length to prevent excessive processing
+    size_t len = strlen(pattern);
+    if (len > 1024) {
+        Log.error("Invalid LED pattern: too long (%u chars, max 1024)",
+                  (unsigned)len);
         return;
     }
 
