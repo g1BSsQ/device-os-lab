@@ -51,6 +51,9 @@ public:
         }
         if (callback) {
             for (const diag_source* src: srcs_) {
+                if (!src || src->id == 0) {  // Validate source and ID
+                    continue;
+                }
                 const int ret = callback(src, data);
                 if (ret != SYSTEM_ERROR_NONE) {
                     return ret;
