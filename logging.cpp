@@ -67,3 +67,30 @@ void log_warn(const std::string& message) {
 void log_error(const std::string& message) {
     log_message(LOG_ERROR, message);
 }
+
+// C-compatible wrapper functions
+extern "C" {
+    void log_info_c(const char* message) {
+        if (message) {
+            log_info(std::string(message));
+        }
+    }
+    
+    void log_error_c(const char* message) {
+        if (message) {
+            log_error(std::string(message));
+        }
+    }
+    
+    void log_warn_c(const char* message) {
+        if (message) {
+            log_warn(std::string(message));
+        }
+    }
+    
+    void log_debug_c(const char* message) {
+        if (message) {
+            log_debug(std::string(message));
+        }
+    }
+}
