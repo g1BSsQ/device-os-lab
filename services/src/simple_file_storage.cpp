@@ -78,6 +78,10 @@ int SimpleFileStorage::save(const void* data, size_t size) {
     {
         return SYSTEM_ERROR_INVALID_ARGUMENT;
     }
+    // Validate reasonable file size (max 10MB)
+    if (size > 10485760) {
+        return SYSTEM_ERROR_TOO_LARGE;
+    }
     const auto fs = filesystem_get_instance(FILESYSTEM_INSTANCE_DEFAULT, nullptr);
     if (!fs) {
         return SYSTEM_ERROR_FILE;
