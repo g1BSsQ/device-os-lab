@@ -96,4 +96,15 @@ bool load_module_data(const std::string& filePath, ModuleData& data);
  */
 bool validate_module_data(const ModuleData& data);
 
+/**
+ * @brief Computes the CRC32 checksum for module data.
+ *
+ * This function calculates the CRC32 checksum for the given module data
+ * to ensure data integrity.
+ *
+ * @param data The module data to compute the checksum for.
+ * @return The computed CRC32 checksum.
+ */
+uint32_t compute_crc32(const ModuleData& data);
+
 #endif // MODULE_DATA_H

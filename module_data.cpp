@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <cstdint>
 
 /**
  * @brief Validates the firmware version.
@@ -160,4 +161,32 @@ bool validate_module_data(const ModuleData& data) {
         return false;
     }
     return true;
+}
+
+/**
+ * @brief Computes the CRC32 checksum for module data.
+ *
+ * This function calculates the CRC32 checksum for the given module data
+ * to ensure data integrity.
+ *
+ * @param data The module data to compute the checksum for.
+ * @return The computed CRC32 checksum.
+ */
+uint32_t compute_crc32(const ModuleData& data) {
+    uint32_t crc = 0xFFFFFFFF;
+    const uint8_t* bytes = reinterpret_cast<const uint8_t*>(&data);
+    size_t length = sizeof(ModuleData);
+
+    for (size_t i = 0; i < length; ++i) {
+        crc ^= bytes[i];
+        for (int j = 0; j < 8; ++j) {
+            if (crc & 1) {
+                crc = (crc >> 1) ^ 0xEDB88320;
+            } else {
+                crc >>= 1;
+            }
+        }
+    }
+
+    return ~crc;
 }
