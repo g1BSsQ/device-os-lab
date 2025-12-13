@@ -59,6 +59,9 @@ char g_errorMsg[ERROR_MESSAGE_BUFFER_SIZE] = {};
 
 void set_system_error_message(const char* fmt, ...) {
 #if HAL_PLATFORM_ERROR_MESSAGES
+    if (!fmt) {
+        return;  // Null format string
+    }
     if (SYSTEM_THREAD_CURRENT()) {
         va_list args;
         va_start(args, fmt);
