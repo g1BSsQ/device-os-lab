@@ -26,8 +26,7 @@
 namespace particle::protocol {
 
 ProtocolError Subscriptions::send_subscription_impl(MessageChannel& channel, const char* filter, size_t filterLen, int flags) {
-    if (!filter || filterLen == 0)
-    {
+    if (!filter || filterLen == 0 || filterLen > MAX_EVENT_NAME_LENGTH) {
         return ProtocolError::INVALID_ARGUMENT;
     }
     Message msg;
@@ -107,6 +106,9 @@ ProtocolError Subscriptions::handle_event(Message& msg, SparkDescriptor::CallEve
     size_t oldHandlerCount = 0; // Number of legacy subscription handlers found
     bool newHandlerFound = false; // Whether a new subscription handler is found
 
+    if (oldHandlerCount >= MAX_SUBSCRIPTIONS) {
+        return ProtocolError::INSUFFICIENT_STORAGE;
+    }
     for (size_t i = 0; i < MAX_SUBSCRIPTIONS; ++i) {
         auto& eventHandler = event_handlers[i];
         if (!eventHandler.handler && !(eventHandler.flags & SubscriptionFlag::LARGE_EVENT)) {
