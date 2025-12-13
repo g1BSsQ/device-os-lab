@@ -142,6 +142,10 @@ spark::feature::State system_thread_get_state(void*)
 #endif
 
 int system_reset(unsigned mode, unsigned reason, unsigned value, unsigned flags, void* reserved) {
+    // Validate reset mode is within range
+    if (mode > SYSTEM_RESET_MODE_FACTORY) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     unsigned defaultReason = RESET_REASON_NONE;
     switch (mode) {
     case SYSTEM_RESET_MODE_NORMAL:
