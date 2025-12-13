@@ -85,6 +85,9 @@ TEST_SOURCES += test/test_hal.cpp
 # Add test_services.cpp to the test build process
 TEST_SOURCES += test/test_services.cpp
 
+# Add UART protocol files to the build process
+COMMUNICATION_SRC += communication/uart_protocol.cpp
+
 # Include modularized makefiles
 include common.mk
 include subdirs.mk
