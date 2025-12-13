@@ -65,6 +65,10 @@ int InputStream::readAll(char* data, size_t size, unsigned timeout) {
     {
         return SYSTEM_ERROR_INVALID_ARGUMENT;
     }
+    // Validate reasonable timeout (max 1 hour)
+    if (timeout > 3600000) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     const auto end = data + size;
     Timer t(timeout);
     for (;;) {
@@ -81,6 +85,9 @@ int InputStream::readAll(char* data, size_t size, unsigned timeout) {
 }
 
 int InputStream::skipAll(size_t size, unsigned timeout) {
+    if (size == 0 || size > 0x7FFFFFFF) {  // Prevent integer overflow
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     size_t n = size;
     Timer t(timeout);
     for (;;) {
@@ -103,6 +110,10 @@ int InputStream::seek(size_t offset) {
 int OutputStream::writeAll(const char* data, size_t size, unsigned timeout) {
     if (!data || size == 0)
     {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
+    // Validate reasonable timeout (max 1 hour)
+    if (timeout > 3600000) {
         return SYSTEM_ERROR_INVALID_ARGUMENT;
     }
     const auto end = data + size;
