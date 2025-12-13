@@ -24,6 +24,10 @@ size_t escape(const char* src, const char* spec, char esc, char* dest, size_t de
     {
         return 0;
     }
+    // Validate escape character is printable
+    if (esc < 32 || esc > 126) {
+        return 0;
+    }
     size_t n = 0;
     for (;;) {
         const char c = *src++;
