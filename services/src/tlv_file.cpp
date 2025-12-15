@@ -119,6 +119,11 @@ ssize_t TlvFile::get(uint16_t key, uint8_t* value, uint16_t length, int index) {
         return SYSTEM_ERROR_INVALID_ARGUMENT;
     }
 
+    // Validate key is non-zero
+    if (key == 0) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
+
     uint16_t dataSize;
     ssize_t ret = SYSTEM_ERROR_NOT_FOUND;
     ssize_t pos = find(key, index, &dataSize);
@@ -141,6 +146,11 @@ int TlvFile::set(uint16_t key, const uint8_t* value, uint16_t length, int index)
 
     if (!open_) {
         return SYSTEM_ERROR_INVALID_STATE;
+    }
+
+    // Validate index is non-negative and reasonable
+    if (index < 0 || index > 1000) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
     }
 
     /* Delete previous entry */
