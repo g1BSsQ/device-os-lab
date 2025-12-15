@@ -103,6 +103,10 @@ int XmodemSender::init(Stream* dest, InputStream* src, size_t size) {
     {
         return SYSTEM_ERROR_INVALID_ARGUMENT;
     }
+    // Validate reasonable file size (max 100MB)
+    if (size > 104857600) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     buf_.reset(new(std::nothrow) char[BUFFER_SIZE]);
     CHECK_TRUE(buf_, SYSTEM_ERROR_NO_MEMORY);
     srcStrm_ = src;
