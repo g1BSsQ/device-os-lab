@@ -52,6 +52,10 @@ uint16_t HAL_OTA_ChunkSize()
 
 bool HAL_FLASH_Begin(uint32_t address, uint32_t length, void* reserved)
 {
+    // Validate flash operation parameters
+    if (address == 0 || length == 0 || length > 0x100000) {  // Max 1MB
+        return false;
+    }
     return false;
 }
 
