@@ -27,6 +27,18 @@ bool macAddressToString(const MacAddress& addr, char* str, size_t size) {
     {
         return false;
     }
+    // Validate MAC address is not all zeros or all FFs
+    bool allZeros = true;
+    bool allFFs = true;
+    for (size_t i = 0; i < MAC_ADDRESS_SIZE; ++i) {
+        if (addr.data[i] != 0x00)
+            allZeros = false;
+        if (addr.data[i] != 0xFF)
+            allFFs = false;
+    }
+    if (allZeros || allFFs) {
+        return false;  // Invalid MAC address
+    }
     for (size_t i = 0; i < MAC_ADDRESS_SIZE; ++i) {
         bytes2hexbuf_lower_case(addr.data + i, 1, str);
         str += 2;
