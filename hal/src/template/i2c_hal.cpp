@@ -51,6 +51,14 @@ void hal_i2c_end(hal_i2c_interface_t i2c,void* reserved)
 
 uint32_t hal_i2c_request(hal_i2c_interface_t i2c, uint8_t address, uint8_t quantity, uint8_t stop, void* reserved)
 {
+    // Validate I2C address (7-bit: 0x08-0x77, excluding reserved addresses)
+    if (address < 0x08 || address > 0x77) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
+    // Validate quantity (max 32 bytes for most I2C implementations)
+    if (quantity == 0 || quantity > 32) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
   return SYSTEM_ERROR_NONE;
 }
 
