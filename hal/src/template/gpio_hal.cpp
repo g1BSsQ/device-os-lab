@@ -98,6 +98,9 @@ void hal_gpio_write(uint16_t pin, uint8_t value)
  * @brief Reads the value of a GPIO pin. Should return either 1 (HIGH) or 0 (LOW).
  */
 int32_t hal_gpio_read(uint16_t pin) {
+    if (pin >= MAX_GPIO_PINS) {
+        return -1;  // Invalid pin
+    }
     uint32_t current_time = hal_get_millis(); // Assume a function to get current time in ms
     int32_t current_state = hal_gpio_raw_read(pin); // Assume a raw read function
 
