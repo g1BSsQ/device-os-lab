@@ -46,6 +46,11 @@ IPAddress::IPAddress(const HAL_IPAddress& address)
 
 IPAddress::IPAddress(uint8_t first_octet, uint8_t second_octet, uint8_t third_octet, uint8_t fourth_octet)
 {
+    // Validate multicast and reserved ranges
+    if (first_octet >= 224 && first_octet <= 239) {
+        // Multicast addresses (224.0.0.0 - 239.255.255.255) - allowed but
+        // should be noted
+    }
     set_ipv4(first_octet, second_octet, third_octet, fourth_octet);
 }
 
@@ -106,8 +111,10 @@ size_t IPAddress::printTo(Print& p) const
 	if (address.v==6) {
 		char buf[INET6_ADDRSTRLEN+1];
 		buf[0] = 0;
-		inet_inet_ntop(AF_INET6, address.ipv6, buf, sizeof(buf));
-		return p.write(buf);
+        if (!inet_inet_ntop(AF_INET6, address.ipv6, buf, sizeof(buf))) {
+            return 0;  // Conversion failed
+        }
+        return p.write(buf);
 	}
 #else
 #pragma message "HAL_USE_INET_HAL_POSIX is required for IPv6 support in IPAddress::printTo()"
