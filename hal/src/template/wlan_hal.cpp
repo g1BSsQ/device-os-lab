@@ -96,6 +96,9 @@ int wlan_connected_info(void* reserved, wlan_connected_info_t* inf, void* reserv
 
 int wlan_set_credentials(WLanCredentials* c)
 {
+    if (!c) {
+        return -1;
+    }
     return -1;
 }
 
@@ -122,6 +125,9 @@ void wlan_set_error_count(uint32_t errorCount)
 
 int wlan_fetch_ipconfig(WLanConfig* config)
 {
+    if (!config) {
+        return -1;
+    }
     return -1;
 }
 
