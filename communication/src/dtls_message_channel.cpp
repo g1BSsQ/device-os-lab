@@ -74,20 +74,30 @@ uint32_t compute_checksum(uint32_t(*calculate_crc)(const uint8_t* data, uint32_t
 
 bool SessionPersist::prepare_save(const uint8_t* random, uint32_t keys_checksum, mbedtls_ssl_context* context, message_id_t next_id)
 {
-	if (context->state != MBEDTLS_SSL_HANDSHAKE_OVER) {
-		LOG(ERROR, "Invalid handshake state");
-		return false;
-	}
+    if (!context || !random) {
+        LOG(ERROR, "Invalid context or random pointer");
+        return false;
+    }
+    if (context->state != MBEDTLS_SSL_HANDSHAKE_OVER) {
+        LOG(ERROR, "Invalid handshake state");
+        return false;
+    }
 
-	uint8_t cid[MBEDTLS_SSL_CID_OUT_LEN_MAX] = {};
-	size_t cidSize = 0;
-	int cidEnabled = MBEDTLS_SSL_CID_DISABLED;
-	int r = mbedtls_ssl_get_peer_cid(context, &cidEnabled, cid, &cidSize);
-	if (r != 0 || cidEnabled != MBEDTLS_SSL_CID_ENABLED || cidSize != DTLS_CID_SIZE) {
-		LOG(ERROR, "Unable to get connection ID");
-		return false;
-	}
-	memcpy(this->cid, cid, DTLS_CID_SIZE);
+    uint8_t cid[MBEDTLS_SSL_CID_OUT_LEN_MAX] = {};
+    size_t cidSize = 0;
+    int cidEnabled = MBEDTLS_SSL_CID_DISABLED;
+    int r = mbedtls_ssl_get_peer_cid(context, &cidEnabled, cid, &cidSize);
+    if (r != 0 || cidEnabled != MBEDTLS_SSL_CID_ENABLED
+        || cidSize != DTLS_CID_SIZE) {
+        LOG(ERROR, "Unable to get connection ID");
+        return false;
+    }
+    // Validate CID buffer didn't overflow
+    if (cidSize > MBEDTLS_SSL_CID_OUT_LEN_MAX) {
+        LOG(ERROR, "CID size exceeds maximum");
+        return false;
+    }
+    memcpy(this->cid, cid, DTLS_CID_SIZE);
 
 	this->keys_checksum = keys_checksum;
 	in_epoch = context->in_epoch;
