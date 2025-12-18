@@ -87,6 +87,10 @@ int getConnectionProperty(protocol::Connection::Enum property, void* data, size_
 int spark_publish_vitals(system_tick_t period_s_, void* reserved_)
 {
     SYSTEM_THREAD_CONTEXT_SYNC(spark_publish_vitals(period_s_, reserved_));
+    // Validate period is reasonable (max 24 hours)
+    if (period_s_ != particle::NOW && period_s_ != 0 && period_s_ > 86400) {
+        return SYSTEM_ERROR_INVALID_ARGUMENT;
+    }
     int result;
 
     switch (period_s_)
@@ -111,6 +115,10 @@ bool spark_subscribe(const char* event_name, EventHandler handler, void* handler
         Spark_Subscription_Scope_TypeDef scope_deprecated, const char* device_id_deprecated, spark_subscribe_param* param)
 {
     SYSTEM_THREAD_CONTEXT_SYNC(spark_subscribe(event_name, handler, handler_data, scope_deprecated, device_id_deprecated, param));
+    // Validate event name
+    if (!event_name || strlen(event_name) == 0 || strlen(event_name) > 64) {
+        return false;
+    }
     int flags = 0;
     if (param) {
         if (param->flags & SUBSCRIBE_FLAG_CBOR_DATA) {
