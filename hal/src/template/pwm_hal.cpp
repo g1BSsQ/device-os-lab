@@ -27,10 +27,18 @@
 #include "pwm_hal.h"
 void hal_pwm_write(uint16_t pin, uint8_t value)
 {
+    // Validate pin number
+    if (pin >= TOTAL_PINS) {
+        return;
+    }
 }
 
 void hal_pwm_write_with_frequency(uint16_t pin, uint8_t value, uint16_t pwm_frequency)
 {
+    // Validate pin and frequency range (typically 1Hz - 100kHz)
+    if (pin >= TOTAL_PINS || pwm_frequency == 0 || pwm_frequency > 100000) {
+        return;
+    }
 }
 
 uint16_t hal_pwm_get_frequency(uint16_t pin)
@@ -81,6 +89,10 @@ uint8_t hal_pwm_get_resolution(uint16_t pin)
 
 void hal_pwm_set_resolution(uint16_t pin, uint8_t resolution)
 {
+    // Validate pin and resolution (typically 8-16 bit)
+    if (pin >= TOTAL_PINS || resolution == 0 || resolution > 16) {
+        return;
+    }
 }
 
 int hal_pwm_sleep(bool sleep, void* reserved)
