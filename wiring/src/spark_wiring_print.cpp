@@ -107,6 +107,10 @@ size_t Print::write(const uint8_t *buffer, size_t size)
   if (!buffer || size == 0) {
     return 0;
   }
+  // Validate reasonable buffer size (max 1MB)
+  if (size > 1048576) {
+      return 0;
+  }
   size_t n = 0;
   while (size--) {
      int chunk = write(*buffer++);
