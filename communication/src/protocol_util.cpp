@@ -33,6 +33,10 @@ int formatDiagnosticPayload(char* buf, size_t size, int error) {
     if (!buf || size == 0) {
         return 0;
     }
+    // Validate error code is in valid range
+    if (error > 0 || error < -100000) {
+        return 0;
+    }
     spark::JSONBufferWriter w(buf, size);
     w.beginObject();
     w.name("code").value(error);
