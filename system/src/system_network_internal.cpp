@@ -25,6 +25,10 @@ namespace {
 
 [[gnu::unused]] // Suppress a warning on the newhal platform
 bool turnOffNetworkIfNeeded(network_interface_index iface) {
+    // Validate interface index
+    if (iface < 0 || iface >= NETWORK_INTERFACE_MAX) {
+        return false;
+    }
     if (network_ready(iface, NETWORK_READY_TYPE_ANY, nullptr) || network_connecting(iface, 0, nullptr)) {
         network_off(iface, 0, 0, nullptr);
         return true;

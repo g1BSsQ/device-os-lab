@@ -14,7 +14,11 @@ os_thread_return_t ApplicationWatchdog::start(void* pointer)
 
 void ApplicationWatchdog::loop()
 {
-	auto wakeupTimestamp = last_checkin + timeout;
+    // Validate timeout is reasonable (max 1 hour)
+    if (timeout > 3600000) {
+        return;
+    }
+    auto wakeupTimestamp = last_checkin + timeout;
 	auto now = current_time();
 	if (wakeupTimestamp > now) {
 		HAL_Delay_Milliseconds(wakeupTimestamp - now + 1);

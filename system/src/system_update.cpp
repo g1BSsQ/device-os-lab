@@ -91,6 +91,10 @@ const char* flag_to_string(uint8_t flag) {
 
 void system_flag_changed(system_flag_t flag, uint8_t oldValue, uint8_t newValue)
 {
+    // Validate flag is within valid range
+    if (flag < 0 || flag >= SYSTEM_FLAG_MAX) {
+        return;
+    }
     if (flag == SYSTEM_FLAG_STARTUP_LISTEN_MODE)
     {
         uint32_t regValue = newValue ? SAFE_MODE_LISTEN : 0xFFFF;

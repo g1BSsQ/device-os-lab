@@ -40,6 +40,14 @@
 
 void HAL_DAC_Write(hal_pin_t pin, uint16_t value)
 {
+    // Validate pin number
+    if (pin >= TOTAL_PINS) {
+        return;
+    }
+    // Validate value is within DAC range (typically 12-bit)
+    if (value > 4095) {
+        return;
+    }
 }
 
 uint8_t HAL_DAC_Is_Enabled(hal_pin_t pin)
@@ -59,6 +67,10 @@ uint8_t HAL_DAC_Get_Resolution(hal_pin_t pin)
 
 void HAL_DAC_Set_Resolution(hal_pin_t pin, uint8_t resolution)
 {
+    // Validate resolution (typically 8, 10, or 12-bit)
+    if (resolution == 0 || resolution > 16) {
+        return;
+    }
 }
 
 void HAL_DAC_Enable_Buffer(hal_pin_t pin, uint8_t state)

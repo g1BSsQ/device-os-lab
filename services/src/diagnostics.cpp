@@ -32,6 +32,10 @@ public:
         {
             return SYSTEM_ERROR_INVALID_ARGUMENT;
         }
+        // Validate source ID is non-zero
+        if (src->id == 0 || src->id > 65535) {
+            return SYSTEM_ERROR_INVALID_ARGUMENT;
+        }
         if (started_) {
             return SYSTEM_ERROR_INVALID_STATE;
         }

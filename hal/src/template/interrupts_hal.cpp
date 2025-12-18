@@ -27,11 +27,19 @@
 #include "interrupts_hal.h"
 int hal_interrupt_attach(uint16_t pin, hal_interrupt_handler_t handler, void* data, InterruptMode mode, hal_interrupt_extra_configuration_t* config)
 {
+    // Validate pin and handler
+    if (pin >= TOTAL_PINS || !handler || mode < 0 || mode > 4) {
+        return -1;
+    }
     return 0;
 }
 
 int hal_interrupt_detach(uint16_t pin)
 {
+    // Validate pin number
+    if (pin >= TOTAL_PINS) {
+        return -1;
+    }
     return 0;
 }
 

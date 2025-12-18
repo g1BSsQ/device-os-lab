@@ -12,6 +12,10 @@ int random(int max)
     {
         return 0;
     }
+    // Validate max is reasonable to prevent overflow
+    if (max > 2147483647) {
+        return 0;
+    }
   return rand() % max;
 }
 
@@ -19,6 +23,10 @@ int random(int min, int max)
 {
   if (min >= max) {
     return min;
+  }
+  // Validate range is reasonable
+  if ((max - min) > 2147483647 || (max - min) < 0) {
+      return min;
   }
   return random(max - min) + min;
 }

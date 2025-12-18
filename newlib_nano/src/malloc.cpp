@@ -56,6 +56,10 @@ void _cfree_r(struct _reent* r, void* ptr) {
 }
 
 void* _calloc_r(struct _reent* r, size_t n, size_t elem) {
+    // Validate allocation size to prevent integer overflow
+    if (n > 0 && elem > SIZE_MAX / n) {
+        return NULL;
+    }
     void* ptr = _malloc_r(r, (size_t)(n * elem));
     if (ptr != NULL) {
         memset(ptr, 0, (size_t)(elem * n));

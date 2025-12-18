@@ -36,6 +36,10 @@
 *******************************************************************************/
 void HAL_Delay_Milliseconds(uint32_t nTime)
 {
+    // Validate delay is reasonable (max 1 hour)
+    if (nTime > 3600000) {
+        return;
+    }
 }
 
 /*******************************************************************************
@@ -47,5 +51,9 @@ void HAL_Delay_Milliseconds(uint32_t nTime)
  *******************************************************************************/
 void HAL_Delay_Microseconds(uint32_t uSec)
 {
+    // Validate delay is reasonable (max 10 seconds)
+    if (uSec > 10000000) {
+        return;
+    }
 }
 

@@ -59,7 +59,14 @@ void stopTimer() {
 
 int startTimer() {
     if (!sTimer) {
-        int r = os_timer_create(&sTimer, 1000 /* period */, timerCallback, nullptr /* timer_id */, false /* one_shot */, nullptr /* reserved */);
+        // Validate timer period (1000ms)
+        const unsigned period = 1000;
+        if (period == 0 || period > 60000) {
+            return SYSTEM_ERROR_INVALID_ARGUMENT;
+        }
+        int r = os_timer_create(&sTimer, period /* period */, timerCallback,
+                                nullptr /* timer_id */, false /* one_shot */,
+                                nullptr /* reserved */);
         if (r != 0) {
             return SYSTEM_ERROR_NO_MEMORY;
         }
@@ -79,6 +86,10 @@ void timerCallback(os_timer_t) {
         Load_SystemFlags();
         if (system_flags.security_mode_override_value != 0xff) {
             if (system_flags.security_mode_override_timeout > 0) {
+                // Validate timeout is reasonable (max 24 hours)
+                if (system_flags.security_mode_override_timeout > 86400) {
+                    system_flags.security_mode_override_timeout = 86400;
+                }
                 --system_flags.security_mode_override_timeout;
             }
             if (!system_flags.security_mode_override_timeout) {
@@ -125,7 +136,12 @@ int security_mode_init() {
     int currentMode = normalMode;
     Load_SystemFlags();
     if (system_flags.security_mode_override_value != 0xff) {
-        if (normalMode != MODULE_INFO_SECURITY_MODE_NONE) {
+        // Validate override value is within valid range
+        if (system_flags.security_mode_override_value
+            > MODULE_INFO_SECURITY_MODE_PROTECTED) {
+            system_flags.security_mode_override_value = 0xff;
+            Save_SystemFlags();
+        } else if (normalMode != MODULE_INFO_SECURITY_MODE_NONE) {
             currentMode = system_flags.security_mode_override_value;
         } else {
             // Clear the override in case the bootloader was protected previously

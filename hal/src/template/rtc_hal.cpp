@@ -34,6 +34,10 @@ int hal_rtc_get_time(struct timeval* tv, void* reserved) {
 }
 
 int hal_rtc_set_time(const struct timeval* tv, void* reserved) {
+    // Validate time value pointer and range
+    if (!tv || tv->tv_sec < 0 || tv->tv_sec > 2147483647) {
+        return -1;
+    }
     return 0;
 }
 
@@ -42,6 +46,10 @@ bool hal_rtc_time_is_valid(void* reserved) {
 }
 
 int hal_rtc_set_alarm(const struct timeval* tv, uint32_t flags, hal_rtc_alarm_handler handler, void* context, void* reserved) {
+    // Validate alarm time and handler
+    if (!tv || !handler || tv->tv_sec < 0) {
+        return -1;
+    }
     return 0;
 }
 

@@ -92,9 +92,9 @@ size_t TwoWire::requestFrom(uint8_t address, size_t quantity, uint8_t sendStop)
     if (address == 0 || address > 0x7F) {
         return 0;
     }
-    if (quantity == 0)
-    {
-        return 0; // Early return for zero-length requests
+    // Validate quantity is reasonable (max 255 bytes typical I2C limit)
+    if (quantity == 0 || quantity > 255) {
+        return 0;
     }
   return requestFrom(WireTransmission(address).quantity(quantity).stop(sendStop));
 }

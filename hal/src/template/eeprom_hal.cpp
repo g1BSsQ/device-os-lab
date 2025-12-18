@@ -33,11 +33,19 @@ void HAL_EEPROM_Init(void)
 
 uint8_t HAL_EEPROM_Read(uint32_t address)
 {
+    // Validate address is within EEPROM bounds
+    if (address >= HAL_EEPROM_Length()) {
+        return 0xFF;
+    }
     return 0;
 }
 
 void HAL_EEPROM_Write(uint32_t address, uint8_t data)
 {
+    // Validate address is within EEPROM bounds
+    if (address >= HAL_EEPROM_Length()) {
+        return;
+    }
 }
 
 size_t HAL_EEPROM_Length() 
