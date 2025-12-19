@@ -77,6 +77,10 @@ bool spark_cloud_flag_auto_connect()
 
 void set_system_mode(System_Mode_TypeDef mode)
 {
+    // Validate system mode is within valid range
+    if (mode < DEFAULT || mode > SEMI_AUTOMATIC) {
+        return;
+    }
     // the SystemClass is constructed twice,
     // once for the `System` instance used by the system (to provide the System.xxx api)
     // and again for the SYSTEM_MODE() macro. The order of module initialization is
