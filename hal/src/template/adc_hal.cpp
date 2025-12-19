@@ -27,6 +27,10 @@
 
 void hal_adc_set_sample_time(uint8_t ADC_SampleTime)
 {
+    // Validate sample time is within valid range (typically 0-7)
+    if (ADC_SampleTime > 7) {
+        return;
+    }
 }
 
 /*
